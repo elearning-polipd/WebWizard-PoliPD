@@ -1362,3 +1362,92 @@ form.survey fieldset.q.done .qn{background:#1f9d55;color:#fff}
  .gx-diffm dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:.88rem}
  .gx-diffm dt{font-weight:800;color:var(--blue)}.gx-diffm dd{margin:0}
 }
+
+/* ===================== v26: GITHUB UI, TAG, AMARAN ===================== */
+.gh{font:13px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif;color:#1f2328;background:#fff;border:1px solid #d1d9e0;border-radius:10px;overflow:hidden;text-align:left}
+.gh *{box-sizing:border-box}
+.gh-hd{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#f6f8fa;border-bottom:1px solid #d1d9e0}
+.gh-menu{width:28px;height:28px;display:grid;place-items:center;border:1px solid #d1d9e0;border-radius:6px;font-size:12px;color:#59636e}
+.gh-logo{width:26px;height:26px;border-radius:50%;background:#1f2328;flex:0 0 26px}
+.gh-crumb{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gh-search{padding:4px 10px;border:1px solid #d1d9e0;border-radius:6px;color:#59636e;background:#fff;font-size:12px;min-width:120px}
+.gh-plus{padding:3px 8px;border:1px solid #d1d9e0;border-radius:6px;color:#59636e;font-size:12px}
+.gh-av{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#b6e3ff,#0969da);flex:0 0 26px}.gh-av.s{width:20px;height:20px;flex-basis:20px}
+.gh-bd{padding:14px 16px 16px;background:#fff}
+.gh-tabs{display:flex;gap:2px;margin:-14px -16px 14px;padding:0 10px;border-bottom:1px solid #d1d9e0;background:#f6f8fa;overflow:hidden;white-space:nowrap}
+.gh-tabs span{padding:9px 8px;color:#1f2328;border-bottom:2px solid transparent;font-size:12.5px}.gh-tabs span.on{border-color:#fd8c73;font-weight:600}
+.gh-btn{display:inline-flex;align-items:center;gap:4px;padding:5px 12px;border-radius:6px;border:1px solid #d1d9e0;background:#f6f8fa;font-weight:600;font-size:12.5px;white-space:nowrap;color:#25292e}
+.gh-btn.green{background:#1f883d;border-color:#1a7f37;color:#fff}
+.gh a{color:#0969da;text-decoration:none}
+.gh-input{display:block;padding:5px 10px;border:1px solid #d1d9e0;border-radius:6px;background:#fff;margin-top:4px;color:#1f2328}.gh-input.on{border-color:#0969da;box-shadow:0 0 0 1px #0969da}.gh-input.s{color:#59636e;margin-bottom:8px}.gh-input.t{color:#818b98;min-height:40px}
+.gh-h{margin:0 0 10px;font-size:16px;font-weight:600;font-family:inherit;padding-bottom:8px;border-bottom:1px solid #d1d9e0}
+.gh-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}.gh-row.l{justify-content:flex-start;flex-wrap:wrap}.gh-row.r{justify-content:flex-start}.gh-sp{flex:1}
+.gh-dash{display:grid;grid-template-columns:1fr 1.5fr;gap:14px}.gh-dash aside,.gh-dash main{display:flex;flex-direction:column;gap:7px}
+.gh-dash i,.gh-set main i{display:block;height:10px;border-radius:5px;background:#eff2f5}.gh-dash i:nth-child(odd){width:70%}
+.gh-form{display:flex;align-items:flex-end;gap:8px}.gh-form label{flex:1;font-weight:600;font-size:12.5px}.gh-sl{padding-bottom:6px;font-size:18px;color:#59636e}
+.gh-ok{margin:6px 0 10px;color:#1a7f37;font-size:12px;font-weight:600}
+.gh-radio{display:flex;flex-direction:column;gap:6px;padding:10px 0;border-top:1px solid #d1d9e0;border-bottom:1px solid #d1d9e0;margin-bottom:10px}
+.gh-radio span{display:flex;align-items:center;gap:6px;color:#59636e;font-size:12px}.gh-radio b{color:#1f2328}
+.gh-radio i{width:13px;height:13px;border-radius:50%;border:1px solid #818b98;flex:0 0 13px}.gh-radio .on i{border:4px solid #0969da}
+.gh-right{text-align:right}
+.gh-box{border:1px solid #9cd7ff;background:#ddf4ff;border-radius:6px;padding:12px}.gh-box p{margin:6px 0 0}
+.gh-drop{border:2px dashed #d1d9e0;border-radius:6px;padding:16px;text-align:center;margin-bottom:12px;display:flex;flex-direction:column;gap:4px}
+.gh-drop b{font-size:14px}.gh-drop small{color:#59636e}
+.gh-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:8px}.gh-chips span{padding:3px 9px;border-radius:999px;background:#ddf4ff;color:#0550ae;font-size:12px;font-weight:600}
+.gh-commit{border:1px solid #d1d9e0;border-radius:6px;padding:12px;display:flex;flex-direction:column;gap:6px;align-items:flex-start}.gh-commit .gh-input{width:100%;margin:0}.gh-commit .gh-radio{width:100%;border:0;padding:4px 0;margin:0}
+.gh-files{border:1px solid #d1d9e0;border-radius:6px;overflow:hidden}
+.gh-fh{display:flex;align-items:center;gap:6px;padding:8px 12px;background:#f6f8fa;border-bottom:1px solid #d1d9e0;font-size:12px;color:#59636e}.gh-fh b{color:#1f2328}.gh-fh em,.gh-fr em{margin-left:auto;font-style:normal;color:#59636e;font-size:12px}
+.gh-fr{display:flex;gap:10px;padding:7px 12px;border-bottom:1px solid #eff2f5}.gh-fr:last-child{border:0}
+.gh-dot{width:9px;height:9px;border-radius:50%;background:#bf8700;animation:ghDot 3s infinite}
+@keyframes ghDot{0%,55%{background:#bf8700}60%,100%{background:#1a7f37}}
+.gh-set{display:grid;grid-template-columns:170px 1fr;gap:14px}.gh-set aside{display:flex;flex-direction:column;gap:2px}
+.gh-set aside span{padding:5px 8px;border-radius:6px}.gh-set aside span.on{background:#eff2f5;font-weight:600;box-shadow:inset 3px 0 #0969da}
+.gh-set aside small{margin:8px 8px 2px;color:#59636e;font-size:11.5px;font-weight:600}.gh-set main{display:flex;flex-direction:column;gap:8px}
+.gh-pages{display:flex;flex-direction:column;align-items:flex-start;gap:6px}.gh-pages small{color:#59636e;font-weight:600;margin-top:4px}.gh-pages>b{font-size:14px;margin-top:6px}
+.gh-drop2{position:relative;display:inline-block;padding-bottom:4px}
+.gh-menu2{position:relative;margin-top:6px;min-width:190px;border:1px solid #d1d9e0;border-radius:10px;background:#fff;box-shadow:0 8px 24px #1f232826;display:flex;flex-direction:column;padding:6px}
+.gh-menu2 b{padding:6px 8px;border-bottom:1px solid #d1d9e0;margin-bottom:4px}.gh-menu2 span{padding:6px 8px;border-radius:6px}
+.gh-live{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px;border:1px solid #4ac26b;background:#dafbe1;border-radius:6px;flex-wrap:wrap}
+.gh-live div{display:flex;flex-direction:column}.gh-live small{color:#59636e;font-weight:400;margin:0}
+/* sasaran: butang yang perlu ditekan */
+.gh .gh-t{position:relative;outline:3px solid #ffdf35;outline-offset:2px;border-radius:6px;box-shadow:0 0 0 7px #ffdf3555;animation:ghPulse 1.8s ease-in-out infinite;cursor:pointer}
+.gh .gh-menu2 .gh-t,.gh .gh-set aside .gh-t{background:#ddf4ff;font-weight:600}
+@keyframes ghPulse{0%,100%{box-shadow:0 0 0 4px #ffdf3555}50%{box-shadow:0 0 0 10px #ffdf3522}}
+.sim-screen .gh{margin:-8px}
+.ghref{margin:22px 0 10px;padding:clamp(14px,2.4vw,24px);border:2px solid var(--ink);border-radius:18px;background:#fff}
+.ghref-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap}.ghref-head h2{margin:.1em 0 .2em}.ghref-head p{margin:0}
+.gh-note{margin:10px 0 14px;padding:8px 12px;border-radius:10px;background:#fff8d6;font-size:.86rem}
+.ghref-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.ghref-list li{display:flex;flex-direction:column;gap:10px;padding:12px;border-radius:14px;background:#fef6ec;border:1.5px solid #10183b22;break-inside:avoid}
+.ghref-cap{display:flex;gap:10px;align-items:flex-start}.ghref-cap p{margin:0 0 6px;font-size:.93rem}
+.ghref-n{flex:0 0 32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--blue);color:#fff;font-family:var(--display)}
+.ghref-btn{display:inline-block;font-size:.8rem;padding:3px 10px;border-radius:999px;background:var(--yellow);border:1.5px solid var(--ink)}
+.ghref-shot{pointer-events:none}
+.ghref-shot .gh-search,.ghref-shot .gh-plus{display:none}
+@media(max-width:860px){.ghref-list{grid-template-columns:1fr}}
+@media(max-width:520px){.gh-dash,.gh-set{grid-template-columns:1fr}.gh-set main,.gh-dash main{display:none}.gh-form{flex-direction:column;align-items:stretch}.gh-sl{display:none}.gh-tabs span:nth-child(n+3):not(:last-child){display:none}}
+@media print{body.print-gh *{visibility:hidden!important}body.print-gh .print-me,body.print-gh .print-me *{visibility:visible!important}body.print-gh .print-me{position:absolute;left:0;top:0;width:100%;border:0}.print-me [data-ghprint]{display:none}.print-me .gh-t{animation:none}}
+/* tag Wajib / Pilihan / Selepas bengkel */
+.tg{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:999px;font:700 .62rem ui-monospace,Menlo,monospace;letter-spacing:.04em;text-transform:uppercase;vertical-align:middle;border:1.5px solid currentColor;font-style:normal}
+.tg-w{color:#b42318;background:#fff1f0}.tg-p{color:#175cd3;background:#eef4ff}.tg-s{color:#5b5f6b;background:#f2f3f5}
+.section-nav a .tg{margin-left:8px}
+.kx-step .tg{margin:4px 0 0;display:table}
+/* amaran simpan */
+.warnbox{display:flex;gap:10px;align-items:flex-start;margin:12px 0;padding:10px 14px;border-radius:12px;background:#fff4e5;border:2px solid #f79009;color:#7a2e0e;font-weight:600;font-size:.9rem}
+.warnbox .ic{flex:0 0 20px;width:20px;height:20px;color:#f79009}
+/* galeri: mockup & skop */
+.gx-mock{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:8px 0 0;font-size:.85rem;color:#5b5f6b}
+.gx-mock .ic{width:16px;height:16px}
+.gx-act{margin:6px 0 0}.gx-act b{color:var(--blue)}
+.gx-scope{margin-top:12px;padding:12px 14px;border-radius:14px;border:2px dashed #175cd3;background:#eef4ff}
+.gx-scope h4{margin:0 0 8px}.gx-scope ul{margin:0;padding:0;list-style:none;display:grid;gap:6px;font-size:.88rem}
+.gx-scope li{display:flex;gap:8px;align-items:flex-start}.gx-scope li b{flex:0 0 auto;padding:1px 8px;border-radius:999px;font-size:.72rem}
+.gx-scope .y b{background:#d1fadf;color:#05603a}.gx-scope .n b{background:#fee4e2;color:#912018}
+.kf-ev{margin:0 0 12px;padding:8px 12px;border-radius:10px;background:#d1fadf;color:#05603a;font-weight:600;font-size:.9rem}
+.skip{position:absolute;left:12px;top:-60px;z-index:999;padding:10px 16px;border-radius:10px;background:var(--ink);color:#fff;font-weight:700;border:2px solid var(--yellow);transition:top .2s}
+.skip:focus{top:12px}
+.sh-state{margin:6px 0 12px;font-size:.9rem;color:#5b5f6b}
+.sim-cursor{height:26px;width:24px}.sim-cursor svg{width:24px;height:24px}
+.ghref-list li,.ghref-shot,.ghref-cap div{min-width:0}.ghref-shot{overflow:hidden;border-radius:10px}
+@media(max-width:860px){.ghref-list{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:520px){.gh-row{flex-wrap:wrap}.gh-hd .gh-crumb{font-size:12px}.gh-bd{padding:12px}.gh-tabs{margin:-12px -12px 12px}.gh-menu2{min-width:0}.gh-live a{word-break:break-all}}
