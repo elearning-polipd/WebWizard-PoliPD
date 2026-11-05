@@ -1136,3 +1136,30 @@ form.survey fieldset.q.done .qn{background:#1f9d55;color:#fff}
 .sitehead nav a[aria-current] .nav-img{transform:scale(1.1);filter:drop-shadow(0 0 4px #ffdf35aa)}
 @media(max-width:740px){.nav-img{width:22px;height:22px}}
 @media(min-width:901px) and (max-width:1440px){.sitehead nav a{padding:7px 7px;font-size:.84rem}.nav-img{width:20px;height:20px;margin-right:5px}}
+
+.gx-types{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:600px){.gx-types{grid-template-columns:1fr}}
+/* fix: plain rotation for elements that are not centred with translate(-50%,-50%) */
+@keyframes spinPlain{to{transform:rotate(360deg)}}
+.ab-ring{animation:spinPlain 30s linear infinite}
+.ab-orbit{animation:spinPlain 40s linear infinite}
+.sc-load .ic{animation:spinPlain 3s linear infinite}
+.sc-shot.fail .sc-load .ic{animation:none}
+/* fix: keep the right-hand artwork in view on section banners */
+.wi-art img{object-position:100% 50%}
+@media(max-width:860px){.wi-art img{object-position:70% 50%}}
+/* facilitator photo column never overlaps the heading */
+@media(min-width:901px){.ab-hero{grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr)}.ab-hero .pg-h1{font-size:clamp(2.6rem,5.2vw,4.6rem)}}
+@media(prefers-reduced-motion:reduce){.ab-ring,.ab-orbit,.sc-load .ic{animation:none}}
+/* hero art: never slide under the headline text */
+@media(min-width:901px){.hx-art{right:0;top:auto;bottom:46px;height:min(calc(100% - 46px),46vw)}}
+@media(min-width:1500px){.hx-art{right:calc((100% - 1500px)/2)}}
+/* header on tablets: brand + language on row 1, menu on row 2 */
+@media(min-width:741px) and (max-width:1240px){
+ .sitehead{display:flex;flex-wrap:wrap;align-items:center;row-gap:8px}
+ .sitehead .brand{order:1}
+ .sitehead .language-switch{order:2;margin-left:auto}
+ .sitehead nav{order:3;flex:1 0 100%;display:flex;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;gap:2px}
+ .sitehead nav::-webkit-scrollbar{display:none}
+ .sitehead nav a{flex:0 0 auto}
+}
