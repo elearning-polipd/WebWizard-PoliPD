@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Studio Builder · Web Wizard</title>
+<link rel="icon" href="./assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#163bcf;--ink:#10183b;--cream:#fef6ec;--paper:#fffdf7;--yellow:#ffdf35;--red:#e33445;--green:#1f9d55;--muted:#4a5378;--display:"Space Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}
+html{overflow-x:clip}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--cream);background-image:linear-gradient(#10183b08 1px,transparent 1px),linear-gradient(90deg,#10183b08 1px,transparent 1px);background-size:28px 28px;line-height:1.5}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:var(--blue)}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.skip{position:absolute;left:12px;top:-60px;z-index:99;padding:10px 16px;border-radius:10px;background:var(--ink);color:#fff;font-weight:700;border:2px solid var(--yellow)}.skip:focus{top:12px}
+
+/* header */
+.top{position:sticky;top:0;z-index:20;background:#fff;border-bottom:3px solid var(--ink)}
+.top-in{max-width:1440px;margin:auto;padding:12px 20px;display:flex;align-items:center;gap:14px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.brand img{width:40px;height:40px}
+.brand b{font:700 1.15rem var(--display);letter-spacing:-.02em;display:block;line-height:1.1}
+.brand small{font-size:.74rem;color:var(--muted);font-weight:600}
+.top-sp{flex:1}
+.lang{display:flex;border:2px solid var(--ink);border-radius:10px;overflow:hidden}
+.lang button{border:0;background:#fff;padding:6px 11px;font-weight:800;font-size:.8rem}
+.lang button.on{background:var(--ink);color:#fff}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;font-weight:800;border:2px solid var(--ink);border-radius:12px;padding:10px 16px;background:var(--yellow);color:var(--ink);text-decoration:none;box-shadow:3px 3px 0 var(--ink);transition:transform .12s,box-shadow .12s}
+.btn:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--ink)}
+.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.btn.blue{background:var(--blue);color:#fff}
+.btn.white{background:#fff}
+.btn.sm{padding:7px 12px;font-size:.85rem}
+
+main{max-width:1440px;margin:auto;padding:22px 20px 40px}
+
+/* hero */
+.hero{position:relative;overflow:hidden;background:var(--blue);color:#fff;border:3px solid var(--ink);border-radius:20px;box-shadow:8px 8px 0 var(--ink);padding:clamp(22px,3.5vw,38px);margin-bottom:22px}
+.hero:before{content:"";position:absolute;right:-60px;top:-70px;width:230px;height:230px;border-radius:50%;background:var(--yellow);border:3px solid var(--ink)}
+.hero:after{content:"";position:absolute;right:170px;bottom:-3px;width:130px;height:65px;border-radius:130px 130px 0 0;background:var(--red);border:3px solid var(--ink);border-bottom:0}
+.hero>*{position:relative;z-index:1;max-width:760px}
+.kick{font:700 .78rem ui-monospace,Menlo,monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--yellow);margin:0 0 16px}
+.hero h1{font:700 clamp(2rem,4.6vw,3.4rem)/1 var(--display);letter-spacing:-.04em;margin:0 0 12px}
+.hero h1 mark{background:var(--yellow);color:var(--ink);padding:0 .15em;border-radius:6px}
+.hero p{margin:0;font-size:1.05rem;opacity:.95}
+
+/* step strip */
+.steps{list-style:none;margin:0 0 22px;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.steps li{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#fff;border:2px solid var(--ink);border-radius:14px;box-shadow:3px 3px 0 var(--ink);font-weight:700;font-size:.9rem;transition:background .3s}
+.steps b{flex:0 0 30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--cream);border:2px solid var(--ink);font-family:var(--display)}
+.steps li.done{background:#eafbf0}.steps li.done b{background:var(--green);color:#fff}
+.steps li.now{background:#fff6c7}.steps li.now b{background:var(--yellow)}
+
+/* layout */
+.layout{display:grid;grid-template-columns:330px 330px minmax(0,1fr);gap:18px;align-items:start}
+.panel{background:var(--paper);border:2px solid var(--ink);border-radius:18px;box-shadow:6px 6px 0 var(--ink);padding:18px;min-width:0}
+.panel h2{display:flex;align-items:center;gap:10px;font:700 1.15rem var(--display);letter-spacing:-.02em;margin:0 0 14px}
+.panel h2 .n{flex:0 0 32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--yellow);border:2px solid var(--ink);font-size:.95rem}
+.panel h2+.hint{margin-top:-8px}
+.hint{font-size:.84rem;color:var(--muted);margin:0 0 12px}
+.sub{font:700 .75rem ui-monospace,Menlo,monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin:16px 0 8px}
+
+/* templates */
+.tpls{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tpl{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:6px;padding:8px;border-radius:14px;background:#fff;border:2px solid #10183b33;transition:transform .2s,border-color .2s,box-shadow .2s}
+.tpl:hover{transform:translateY(-3px)}
+.tpl.on{border-color:var(--ink);box-shadow:3px 3px 0 var(--ink);background:#fff6c7}
+.tpl:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.tpl .th{aspect-ratio:16/9;border-radius:9px;overflow:hidden;border:1.5px solid var(--ink);background:linear-gradient(135deg,#7c3aed,#f472b6)}
+.tpl .th img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.tpl b{font:700 .9rem var(--display)}
+.tpl small{font-size:.74rem;color:var(--muted);line-height:1.3}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{border:2px solid var(--ink);background:#fff;border-radius:999px;padding:6px 12px;font-weight:700;font-size:.82rem}
+.seg button.on{background:var(--ink);color:#fff}
+
+/* fields */
+.field{margin-bottom:12px}
+label{display:block;font-size:.82rem;font-weight:800;margin-bottom:5px}
+input,textarea,select{width:100%;border:2px solid #10183b40;border-radius:10px;padding:9px 11px;background:#fff}
+input:focus,textarea:focus,select:focus{border-color:var(--blue);outline:none;box-shadow:0 0 0 3px #163bcf33}
+textarea{resize:vertical;min-height:76px}
+.row{display:flex;gap:10px}.row>*{flex:1;min-width:0}
+input[type=color]{height:44px;padding:4px;cursor:pointer}
+.swatches{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.swatches button{width:28px;height:28px;border-radius:50%;border:2px solid var(--ink);background:var(--c)}
+.status{font-size:.84rem;font-weight:700;color:var(--green);min-height:22px;margin-top:8px}
+.note{margin-top:12px;padding:10px 12px;border-radius:12px;background:#fff6c7;border:1.5px solid var(--ink);font-size:.82rem}
+
+/* preview */
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.toolbar h2{margin:0}
+.dev{display:flex;border:2px solid var(--ink);border-radius:12px;overflow:hidden}
+.dev button{border:0;background:#fff;padding:7px 12px;font-weight:700;font-size:.82rem;border-right:2px solid var(--ink)}
+.dev button:last-child{border-right:0}
+.dev button.on{background:var(--blue);color:#fff}
+.browser{border:2px solid var(--ink);border-radius:14px;overflow:hidden;background:#e9ecf8}
+.bar{display:flex;align-items:center;gap:6px;padding:8px 12px;background:#fff;border-bottom:2px solid var(--ink)}
+.bar i{width:11px;height:11px;border-radius:50%;background:var(--red);border:1.5px solid var(--ink)}.bar i:nth-child(2){background:var(--yellow)}.bar i:nth-child(3){background:var(--green)}
+.bar em{flex:1;margin-left:8px;font:600 .78rem ui-monospace,Menlo,monospace;font-style:normal;background:#f2f4fb;border-radius:999px;padding:4px 12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stage{display:flex;justify-content:center;padding:12px}
+.preview{width:100%;height:480px;background:#fff;border:0;border-radius:8px;transition:width .3s}
+.preview.tablet{width:640px;max-width:100%}.preview.mobile{width:375px;max-width:100%}
+.tabs{display:flex;gap:6px;margin:16px 0 8px}
+.tabs button{border:2px solid var(--ink);background:#fff;border-radius:10px;padding:6px 14px;font:700 .82rem ui-monospace,Menlo,monospace}
+.tabs button.on{background:var(--ink);color:var(--yellow)}
+.code{width:100%;min-height:230px;background:#10183b;color:#dfe6ff;border:2px solid var(--ink);border-radius:12px;padding:12px;font:12.5px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;tab-size:2}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+
+/* publish */
+.publish{margin-top:22px;background:#fff;border:2px solid var(--ink);border-radius:18px;box-shadow:6px 6px 0 var(--ink);padding:20px}
+.publish h2{display:flex;align-items:center;gap:10px;font:700 1.25rem var(--display);margin:0 0 6px}
+.publish ol{list-style:none;margin:14px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.publish li{position:relative;padding:14px;border-radius:14px;background:var(--cream);border:1.5px solid #10183b33;font-size:.9rem}
+.publish li b{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--blue);color:#fff;font-family:var(--display);margin-bottom:8px}
+.publish kbd{background:#1f883d;color:#fff;border-radius:6px;padding:1px 7px;font:700 .82rem system-ui}
+.publish code{background:#e8edff;border-radius:6px;padding:1px 6px;font-size:.82rem}
+.foot{text-align:center;font-size:.82rem;color:var(--muted);margin:26px 0 0}
+
+@media(max-width:1180px){.layout{grid-template-columns:1fr 1fr}.workspace{grid-column:1/-1}.steps{grid-template-columns:repeat(3,1fr)}.publish ol{grid-template-columns:1fr 1fr}}
+@media(max-width:700px){.back-t{display:none}.kick{padding-right:70px}.top-in{padding:10px 14px;gap:10px}main{padding:14px 14px 30px}.layout{grid-template-columns:1fr}.workspace{grid-column:auto}.steps{display:flex;overflow-x:auto;padding-bottom:6px}.steps li{flex:0 0 auto}.hero:after{display:none}.hero:before{width:110px;height:110px;right:-40px;top:-40px}.publish ol{grid-template-columns:1fr}.brand small{display:none}.preview{height:420px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+/* mod terbenam dalam Web Wizard */
+html.embed body{background:transparent}
+html.embed .top,html.embed .hero,html.embed .skip,html.embed .foot{display:none}
+html.embed main{padding:4px 8px 16px}
+html.embed .steps{margin-top:0}
+</style>
+</head>
+<body>
+<a class="skip" href="#content" data-t="skip">Langkau ke studio</a>
+<header class="top"><div class="top-in">
+  <a class="brand" href="./index.html#utama"><img src="./assets/icon-app.png" alt=""><span><b>Studio Builder</b><small data-t="brandSub">Web Wizard · Digital Discovery Series 2026</small></span></a>
+  <span class="top-sp"></span>
+  <a class="btn white sm back" href="./index.html#praktikal" aria-label="Web Wizard">←<span class="back-t"> Web Wizard</span></a>
+  <div class="lang" role="group" aria-label="Language"><button type="button" data-lang="ms" class="on">BM</button><button type="button" data-lang="en">EN</button></div>
+</div></header>
+
+<main id="content">
+  <section class="hero">
+    <p class="kick" data-t="kick">Studio praktikal · Tanpa kod · Tanpa API</p>
+    <h1 data-t="h1" data-html>Bina laman web <mark>pertama</mark> anda ✨</h1>
+    <p data-t="lead">Pilih jenis laman dan gaya, isi kandungan, lihat pratonton di telefon, kemudian muat turun satu fail ZIP untuk diterbitkan di GitHub Pages.</p>
+  </section>
+
+  <ol class="steps" id="steps">
+    <li data-s="1"><b>1</b><span data-t="s1">Pilih templat</span></li>
+    <li data-s="2"><b>2</b><span data-t="s2">Isi kandungan</span></li>
+    <li data-s="3"><b>3</b><span data-t="s3">Pilih gaya & warna</span></li>
+    <li data-s="4"><b>4</b><span data-t="s4">Pratonton & sunting</span></li>
+    <li data-s="5"><b>5</b><span data-t="s5">Muat turun & terbit</span></li>
+  </ol>
+
+  <div class="layout">
+    <section class="panel" aria-labelledby="p1">
+      <h2 id="p1"><span class="n">1</span><span data-t="p1">Pilih jenis laman</span></h2>
+      <p class="hint" data-t="p1h">Contoh di bawah menunjukkan rupa gaya yang dipilih.</p>
+      <div class="tpls" id="templates"></div>
+      <p class="sub" data-t="styleH">3 · Gaya reka bentuk</p>
+      <div class="seg" id="styles" role="group"></div>
+      <div class="row" style="margin-top:12px">
+        <div class="field"><label for="primary" data-t="primary">Warna utama</label><input type="color" id="primary" value="#163bcf"></div>
+        <div class="field"><label for="font" data-t="font">Fon</label><select id="font"><option value="system-ui, -apple-system, 'Segoe UI', sans-serif" data-t="f1">Moden</option><option value="Georgia, 'Times New Roman', serif" data-t="f2">Elegan (serif)</option><option value="'Trebuchet MS', 'Segoe UI', sans-serif" data-t="f3">Mesra</option></select></div>
+      </div>
+      <div class="swatches" id="swatches" aria-label="Palet cepat"></div>
+      <div class="actions"><button class="btn white sm" id="reset" type="button" data-t="reset">↺ Set semula templat</button></div>
+    </section>
+
+    <section class="panel" aria-labelledby="p2">
+      <h2 id="p2"><span class="n">2</span><span data-t="p2">Isi kandungan anda</span></h2>
+      <p class="hint" data-t="p2h">Gantikan teks contoh dengan maklumat sebenar anda.</p>
+      <div class="field"><label for="title" data-t="lTitle">Tajuk laman</label><input id="title" maxlength="90"></div>
+      <div class="field"><label for="tagline" data-t="lTag">Ayat ringkas (tagline)</label><input id="tagline" maxlength="150"></div>
+      <div class="field"><label for="about" data-t="lAbout">Pengenalan</label><textarea id="about"></textarea></div>
+      <div class="field"><label for="cards" data-t="lCards">Tiga perkara utama (satu baris setiap satu)</label><textarea id="cards" rows="4"></textarea></div>
+      <div class="field"><label for="cta" data-t="lCta">Teks butang utama</label><input id="cta"></div>
+      <div class="field"><label for="contact" data-t="lMail">Emel untuk dihubungi (pilihan)</label><input type="email" id="contact" placeholder="nama@polipd.edu.my"></div>
+      <button class="btn blue" id="apply" type="button" data-t="apply">↻ Kemas kini pratonton</button>
+      <div class="status" id="status" role="status"></div>
+      <p class="note" data-t="honest">Jangan masukkan pencapaian, testimoni atau maklumat yang tidak benar. Laman ini boleh dilihat oleh sesiapa sahaja.</p>
+    </section>
+
+    <section class="panel workspace" aria-labelledby="p4">
+      <div class="toolbar"><h2 id="p4"><span class="n">4</span><span data-t="p4">Pratonton langsung</span></h2>
+        <div class="dev" role="group"><button type="button" data-device="desktop" class="on" data-t="dDesk">Desktop</button><button type="button" data-device="tablet" data-t="dTab">Tablet</button><button type="button" data-device="mobile" data-t="dMob">Telefon</button></div></div>
+      <div class="browser"><div class="bar"><i></i><i></i><i></i><em id="url">nama-anda.github.io/laman-saya</em></div><div class="stage"><iframe class="preview" id="preview" title="Pratonton laman web" sandbox="allow-scripts"></iframe></div></div>
+      <div class="toolbar" style="margin-top:16px"><h2 style="font-size:1rem" data-t="codeH">Penyunting kod</h2><span class="hint" style="margin:0" data-t="codeHint">Sunting kod, kemudian tekan Jalankan kod</span></div>
+      <div class="tabs" role="group"><button type="button" data-tab="html" class="on">HTML</button><button type="button" data-tab="css">CSS</button><button type="button" data-tab="js">JS</button></div>
+      <textarea id="editor" class="code" spellcheck="false" aria-label="Code editor"></textarea>
+      <div class="actions">
+        <button class="btn blue" id="run" type="button" data-t="run">▶ Jalankan kod</button>
+        <button class="btn" id="download" type="button" data-t="dl">⬇ Muat turun laman-saya.zip</button>
+        <button class="btn white" id="copy" type="button" data-t="copy">Salin kod</button>
+      </div>
+      <p class="hint" style="margin-top:10px" data-t="warn">Menukar templat atau borang akan menjana semula kod. Muat turun suntingan anda dahulu.</p>
+    </section>
+  </div>
+
+  <section class="publish" aria-labelledby="p5">
+    <h2 id="p5"><span class="n" style="flex:0 0 32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--yellow);border:2px solid var(--ink);font-size:.95rem">5</span><span data-t="p5">Terbitkan di GitHub Pages</span></h2>
+    <p class="hint" style="margin:0" data-t="p5h">Ikut panduan bergambar di bahagian Penerbitan untuk melihat butang yang perlu ditekan.</p>
+    <ol>
+      <li><b>1</b><span data-t="g1" data-html>Ekstrak <code>laman-saya.zip</code>.</span></li>
+      <li><b>2</b><span data-t="g2" data-html>Di GitHub, tekan <kbd>New</kbd>, namakan repositori <code>laman-saya</code>, pilih Public.</span></li>
+      <li><b>3</b><span data-t="g3" data-html>Tekan <i>uploading an existing file</i>, seret SEMUA fail dari dalam folder, kemudian <i>Commit changes</i>.</span></li>
+      <li><b>4</b><span data-t="g4" data-html><i>Settings → Pages</i> → Branch <code>main</code> / root → <i>Save</i>. Tunggu 1–2 minit.</span></li>
+    </ol>
+    <div class="actions"><a class="btn blue" href="./index.html#github" data-t="guide">Buka panduan GitHub →</a></div>
+  </section>
+  <p class="foot">Web Wizard · From Idea to Live · Unit e-Learning POLIPD</p>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+(function(){
+var EMBED=/[?&]embed=1/.test(location.search);if(EMBED)document.documentElement.classList.add('embed');
+var LANG='ms';try{var q=new URLSearchParams(location.search).get('lang');LANG=q==='en'?'en':(localStorage.getItem('ww-studio-lang')||'ms');}catch(e){}
+var T={
+ skip:['Langkau ke studio','Skip to the studio'],brandSub:['Web Wizard · Digital Discovery Series 2026','Web Wizard · Digital Discovery Series 2026'],back:['← Web Wizard','← Web Wizard'],
+ kick:['Studio praktikal · Tanpa kod · Tanpa API','Practical studio · No code · No API'],
+ h1:['Bina laman web <mark>pertama</mark> anda ✨','Build your <mark>first</mark> website ✨'],
+ lead:['Pilih jenis laman dan gaya, isi kandungan, lihat pratonton di telefon, kemudian muat turun satu fail ZIP untuk diterbitkan di GitHub Pages.','Choose a site type and style, add your content, preview it on a phone, then download one ZIP file to publish on GitHub Pages.'],
+ s1:['Pilih templat','Choose a template'],s2:['Isi kandungan','Add content'],s3:['Pilih gaya & warna','Choose style & colour'],s4:['Pratonton & sunting','Preview & edit'],s5:['Muat turun & terbit','Download & publish'],
+ p1:['Pilih jenis laman','Choose a site type'],p1h:['Contoh di bawah menunjukkan rupa gaya yang dipilih.','The samples show how the chosen style looks.'],styleH:['3 · Gaya reka bentuk','3 · Design style'],
+ primary:['Warna utama','Main colour'],font:['Fon','Font'],f1:['Moden','Modern'],f2:['Elegan (serif)','Elegant (serif)'],f3:['Mesra','Friendly'],reset:['↺ Set semula templat','↺ Reset template'],
+ p2:['Isi kandungan anda','Add your content'],p2h:['Gantikan teks contoh dengan maklumat sebenar anda.','Replace the sample text with your real details.'],
+ lTitle:['Tajuk laman','Site title'],lTag:['Ayat ringkas (tagline)','Tagline'],lAbout:['Pengenalan','Introduction'],lCards:['Tiga perkara utama (satu baris setiap satu)','Three key items (one per line)'],lCta:['Teks butang utama','Main button text'],lMail:['Emel untuk dihubungi (pilihan)','Contact email (optional)'],
+ apply:['↻ Kemas kini pratonton','↻ Update preview'],honest:['Jangan masukkan pencapaian, testimoni atau maklumat yang tidak benar. Laman ini boleh dilihat oleh sesiapa sahaja.','Do not add achievements, testimonials or details that are not true. Anyone can see this site.'],
+ p4:['Pratonton langsung','Live preview'],dDesk:['Desktop','Desktop'],dTab:['Tablet','Tablet'],dMob:['Telefon','Phone'],codeH:['Penyunting kod','Code editor'],codeHint:['Sunting kod, kemudian tekan Jalankan kod','Edit the code, then press Run code'],
+ run:['▶ Jalankan kod','▶ Run code'],dl:['⬇ Muat turun laman-saya.zip','⬇ Download laman-saya.zip'],copy:['Salin kod','Copy code'],warn:['Menukar templat atau borang akan menjana semula kod. Muat turun suntingan anda dahulu.','Changing the template or form regenerates the code. Download your edits first.'],
+ p5:['Terbitkan di GitHub Pages','Publish on GitHub Pages'],p5h:['Ikut panduan bergambar di bahagian Penerbitan untuk melihat butang yang perlu ditekan.','Follow the picture guide in the Publishing section to see which buttons to press.'],
+ g1:['Ekstrak <code>laman-saya.zip</code>.','Extract <code>laman-saya.zip</code>.'],g2:['Di GitHub, tekan <kbd>New</kbd>, namakan repositori <code>laman-saya</code>, pilih Public.','On GitHub, press <kbd>New</kbd>, name the repository <code>laman-saya</code>, choose Public.'],
+ g3:['Tekan <i>uploading an existing file</i>, seret SEMUA fail dari dalam folder, kemudian <i>Commit changes</i>.','Press <i>uploading an existing file</i>, drag ALL files from inside the folder, then <i>Commit changes</i>.'],
+ g4:['<i>Settings → Pages</i> → Branch <code>main</code> / root → <i>Save</i>. Tunggu 1–2 minit.','<i>Settings → Pages</i> → Branch <code>main</code> / root → <i>Save</i>. Wait 1–2 minutes.'],
+ guide:['Buka panduan GitHub →','Open the GitHub guide →'],
+ gen:['Laman dijana. Lihat pratonton di sebelah.','Site generated. See the preview.'],ran:['Pratonton dikemas kini daripada kod anda.','Preview updated from your code.'],copied:['Kod disalin.','Code copied.'],nocopy:['Pilih dan salin kod secara manual.','Select and copy the code manually.'],
+ nozip:['Pustaka ZIP tidak dapat dimuatkan. Semak sambungan internet dan muat semula.','The ZIP library could not load. Check your internet connection and reload.'],zipped:['laman-saya.zip dimuat turun. Ekstrak sebelum memuat naik ke GitHub.','laman-saya.zip downloaded. Extract it before uploading to GitHub.'],
+ sMin:['Minimal profesional','Professional minimalist'],sFun:['Mesra dan berwarna','Friendly and colourful'],sBold:['Tajuk besar dan kontras','Bold headings and contrast']
+};
+var TYPES={
+ pdp:{img:'pdp',name:['📚 Laman PdP','📚 Teaching & learning'],d:['Nota, aktiviti dan kuiz kursus','Course notes, activities and quizzes'],p:{ms:{title:'Communicative English 3',tagline:'Nota, aktiviti dan kuiz untuk setiap minggu',about:'Selamat datang ke laman kursus ini. Semua bahan pembelajaran disusun mengikut minggu supaya mudah dicari. (contoh)',cards:'Nota & slaid\nVideo & latihan\nKuiz & tugasan',cta:'Mula Minggu 1'},en:{title:'Communicative English 3',tagline:'Notes, activities and quizzes for every week',about:'Welcome to this course site. All learning materials are arranged by week so they are easy to find. (example)',cards:'Notes & slides\nVideos & practice\nQuizzes & assignments',cta:'Start Week 1'}},c:'#163bcf'},
+ kerja:{img:'kerja',name:['🗂️ Pengurusan kerja','🗂️ Work management'],d:['Tugasan, jadual dan dokumen unit','Unit tasks, schedule and documents'],p:{ms:{title:'Hab Kerja Unit',tagline:'Tugasan, tarikh penting dan dokumen dalam satu tempat',about:'Laman ini membantu ahli unit menyemak tugasan, tarikh penting, SOP dan borang dengan cepat. (contoh)',cards:'Tugasan minggu ini\nJadual & mesyuarat\nSOP & borang',cta:'Lihat tugasan'},en:{title:'Unit Work Hub',tagline:'Tasks, key dates and documents in one place',about:'This site helps unit members check tasks, key dates, SOPs and forms quickly. (example)',cards:"This week's tasks\nSchedule & meetings\nSOPs & forms",cta:'View tasks'}},c:'#0d9488'},
+ portfolio:{img:'portfolio',name:['👩‍🏫 Portfolio','👩‍🏫 Portfolio'],d:['Profil, projek dan hubungan','Profile, projects and contact'],p:{ms:{title:'Nama Anda',tagline:'Pensyarah · Pereka · Pembelajar sepanjang hayat (contoh)',about:'Saya membantu pelajar belajar dengan lebih yakin melalui bahan digital yang mudah digunakan. (contoh)',cards:'Tentang saya\nProjek pilihan\nKemahiran',cta:'Lihat projek'},en:{title:'Your Name',tagline:'Lecturer · Designer · Lifelong learner (example)',about:'I help students learn with more confidence through easy-to-use digital materials. (example)',cards:'About me\nSelected projects\nSkills',cta:'View projects'}},c:'#7c3aed'},
+ acara:{img:'',name:['🎉 Acara','🎉 Event'],d:['Program, penceramah dan pendaftaran','Programme, speakers and registration'],p:{ms:{title:'Hari Digital Kreatif',tagline:'Hubung · Cipta · Raikan',about:'Sertai program sehari yang penuh dengan idea praktikal, inspirasi dan rangkaian baharu. (contoh)',cards:'Atur cara\nPenceramah\nPendaftaran',cta:'Daftar sekarang'},en:{title:'Creative Digital Day',tagline:'Connect · Create · Celebrate',about:'Join a one-day programme full of practical ideas, inspiration and new connections. (example)',cards:'Programme\nSpeakers\nRegistration',cta:'Register now'}},c:'#e33445'}
+};
+var STYLES={min:'sMin',fun:'sFun',bold:'sBold'};
+var SW=['#163bcf','#0d9488','#7c3aed','#e33445','#f97316','#10183b'];
+var cur='pdp',sty='min',tab='html',files={html:'',css:'',js:''},touched={};
+var $=function(i){return document.getElementById(i)};
+var L=function(k){var v=T[k];return v?(LANG==='en'?v[1]:v[0]):k;};
+var esc=function(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});};
+var hex=function(s){return /^#[0-9a-f]{6}$/i.test(s)?s:'#163bcf'};
+function stepUp(n){document.querySelectorAll('#steps li').forEach(function(li){var s=+li.dataset.s;li.classList.toggle('done',s<n);li.classList.toggle('now',s===n);});}
+function i18n(){document.documentElement.lang=LANG;document.querySelectorAll('[data-t]').forEach(function(el){var v=L(el.dataset.t);if(el.hasAttribute('data-html'))el.innerHTML=v;else el.textContent=v;});document.querySelectorAll('[data-lang]').forEach(function(b){b.classList.toggle('on',b.dataset.lang===LANG);});$('preview').title=LANG==='en'?'Website preview':'Pratonton laman web';renderTpls();renderStyles();}
+function thumb(k){var t=TYPES[k];return t.img?'./assets/sample-'+t.img+'-'+sty+'-sm.webp':'';}
+function renderTpls(){$('templates').innerHTML=Object.keys(TYPES).map(function(k){var t=TYPES[k],src=thumb(k);return '<button type="button" class="tpl'+(k===cur?' on':'')+'" data-tpl="'+k+'" aria-pressed="'+(k===cur)+'"><span class="th">'+(src?'<img src="'+src+'" alt="" loading="lazy">':'')+'</span><b>'+(LANG==='en'?t.name[1]:t.name[0])+'</b><small>'+(LANG==='en'?t.d[1]:t.d[0])+'</small></button>';}).join('');
+ document.querySelectorAll('[data-tpl]').forEach(function(b){b.onclick=function(){cur=b.dataset.tpl;loadPreset();stepUp(2);};});}
+function renderStyles(){$('styles').innerHTML=Object.keys(STYLES).map(function(k){return '<button type="button" data-sty="'+k+'" class="'+(k===sty?'on':'')+'" aria-pressed="'+(k===sty)+'">'+L(STYLES[k])+'</button>';}).join('');
+ document.querySelectorAll('[data-sty]').forEach(function(b){b.onclick=function(){sty=b.dataset.sty;renderStyles();renderTpls();generate();stepUp(4);};});}
+function loadPreset(){var p=TYPES[cur].p[LANG];['title','tagline','about','cards','cta'].forEach(function(k){$(k).value=p[k];});$('contact').value='';$('primary').value=TYPES[cur].c;renderTpls();generate();}
+function cssFor(pc,font){var base=':root{--p:'+pc+';--font:'+font+'}\n*{box-sizing:border-box}\nhtml{scroll-behavior:smooth}\nbody{margin:0;font-family:var(--font);line-height:1.6}\nimg{max-width:100%}\n.wrap{width:min(1100px,90%);margin:auto}\n.nav{position:sticky;top:0;z-index:5}\n.nav .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 0;flex-wrap:wrap}\n.logo{font-weight:800;text-decoration:none}\n.nav nav{display:flex;gap:18px;flex-wrap:wrap}\n.nav nav a{text-decoration:none;font-size:.95rem}\n.hero{padding:90px 0}\n.hero h1{margin:12px 0}\n.eyebrow{font-size:.75rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase}\n.btn{display:inline-block;margin-top:22px;padding:13px 22px;text-decoration:none;font-weight:800}\n.section{padding:64px 0}\n.section h2{font-size:clamp(1.6rem,3vw,2.2rem);margin:6px 0 14px}\n.section>.wrap>p{max-width:680px}\n.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:18px}\n.card{padding:24px}\n.card .ic{font-size:1.8rem}\n.card h3{margin:10px 0 6px}\n.contact{text-align:center}\nfooter{text-align:center;padding:26px;font-size:.85rem}\n.reveal{opacity:0;transform:translateY(16px);transition:.6s}\n.reveal.in{opacity:1;transform:none}\n@media(max-width:700px){.cards{grid-template-columns:1fr}.hero{padding:60px 0}.nav .wrap{justify-content:center}}\n@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}\n';
+ if(sty==='min')return base+'\n/* Gaya: Minimal profesional */\nbody{background:#fff;color:#111827}\n.nav{background:#fff;border-bottom:1px solid #e5e7eb}\n.logo{color:#111827}.nav nav a{color:#4b5563}\n.hero h1{font-size:clamp(2.2rem,5vw,3.6rem);letter-spacing:-.02em}\n.hero p{font-size:1.15rem;color:#4b5563;max-width:600px}\n.eyebrow{color:var(--p)}\n.btn{background:var(--p);color:#fff;border-radius:8px}\n.section{border-top:1px solid #e5e7eb}\n.card{border:1px solid #e5e7eb;border-radius:10px}\n.card .ic{color:var(--p)}\nfooter{border-top:1px solid #e5e7eb;color:#6b7280}\n';
+ if(sty==='fun')return base+'\n/* Gaya: Mesra dan berwarna */\nbody{background:#fff7ed;color:#1f2937}\n.nav{background:#ffffffe6;backdrop-filter:blur(6px)}\n.logo{color:var(--p)}.nav nav a{color:#374151;font-weight:600}\n.hero{text-align:center;background:radial-gradient(circle at 15% 20%,#fde68a,transparent 40%),radial-gradient(circle at 85% 30%,#c4b5fd,transparent 40%),radial-gradient(circle at 50% 100%,#99f6e4,transparent 45%)}\n.hero h1{font-size:clamp(2.2rem,5.5vw,3.8rem);color:var(--p)}\n.hero p{font-size:1.2rem;max-width:620px;margin:auto}\n.eyebrow{display:inline-block;background:#fff;border-radius:999px;padding:6px 14px;color:var(--p)}\n.btn{background:var(--p);color:#fff;border-radius:999px;box-shadow:0 8px 20px #0002}\n.card{background:#fff;border-radius:24px;box-shadow:0 10px 30px #0000000f}\n.card:nth-child(1){transform:rotate(-1.5deg);background:#fef3c7}.card:nth-child(2){background:#ede9fe}.card:nth-child(3){transform:rotate(1.5deg);background:#ccfbf1}\nfooter{color:#6b7280}\n';
+ return base+'\n/* Gaya: Tajuk besar dan kontras */\nbody{background:#0b0b0b;color:#fff}\n.nav{background:#0b0b0b;border-bottom:3px solid #fff}\n.logo{color:#fff;text-transform:uppercase;letter-spacing:.05em}.nav nav a{color:#fff;text-transform:uppercase;font-size:.8rem;font-weight:800;letter-spacing:.1em}\n.hero h1{font-size:clamp(2.8rem,9vw,6.5rem);line-height:.9;text-transform:uppercase;letter-spacing:-.03em}\n.hero h1 span{color:var(--p)}\n.hero p{font-size:1.15rem;max-width:600px;color:#d4d4d4}\n.eyebrow{color:var(--p)}\n.btn{background:var(--p);color:#0b0b0b;border:3px solid #fff;box-shadow:6px 6px 0 #fff}\n.section{border-top:3px solid #fff}\n.section h2{text-transform:uppercase}\n.card{border:3px solid #fff;background:#0b0b0b}\n.card .ic{color:var(--p)}\nfooter{border-top:3px solid #fff;color:#a3a3a3}\n';}
+function generate(){var title=esc($('title').value||'Laman Saya'),tag=esc($('tagline').value),about=esc($('about').value),cta=esc($('cta').value||'Ketahui lagi'),mail=$('contact').value.trim(),items=$('cards').value.split('\n').map(function(x){return x.trim();}).filter(Boolean).slice(0,6);
+ var ok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)?mail:'',en=LANG==='en';var pc=hex($('primary').value);if(sty==='bold'&&pc.toLowerCase()==='#163bcf')pc='#facc15';
+ var nav=en?['About','Highlights','Contact']:['Tentang','Sorotan','Hubungi'];
+ var h1=sty==='bold'?title.replace(/(\S+)$/,'<span>$1</span>'):title;
+ var cards=items.map(function(x,i){return '        <article class="card reveal"><div class="ic">'+['✦','★','◆','✺','✳','✧'][i]+'</div><h3>'+esc(x)+'</h3><p>'+(en?'Add one short sentence about this.':'Tambah satu ayat ringkas tentang perkara ini.')+'</p></article>';}).join('\n');
+ files.html='<!doctype html>\n<html lang="'+(en?'en':'ms')+'">\n<head>\n  <meta charset="utf-8">\n  <meta name="viewport" content="width=device-width,initial-scale=1">\n  <title>'+title+'</title>\n  <link rel="stylesheet" href="style.css">\n</head>\n<body>\n  <header class="nav"><div class="wrap"><a class="logo" href="#home">'+title+'</a><nav><a href="#about">'+nav[0]+'</a><a href="#highlights">'+nav[1]+'</a><a href="#contact">'+nav[2]+'</a></nav></div></header>\n  <main>\n    <section class="hero" id="home"><div class="wrap"><span class="eyebrow">'+(en?'Welcome':'Selamat datang')+'</span><h1>'+h1+'</h1><p>'+tag+'</p><a class="btn" href="#highlights">'+cta+'</a></div></section>\n    <section class="section reveal" id="about"><div class="wrap"><span class="eyebrow">'+(en?'Introduction':'Pengenalan')+'</span><h2>'+nav[0]+'</h2><p>'+about+'</p></div></section>\n    <section class="section" id="highlights"><div class="wrap"><span class="eyebrow">'+nav[1]+'</span><h2>'+(en?'What you will find':'Apa yang ada di sini')+'</h2>\n      <div class="cards">\n'+cards+'\n      </div></div></section>\n    <section class="section contact reveal" id="contact"><div class="wrap"><h2>'+(en?"Let's connect":'Mari berhubung')+'</h2><p>'+(en?'Thank you for visiting.':'Terima kasih kerana melawat.')+'</p>'+(ok?'<a class="btn" href="mailto:'+esc(ok)+'">'+(en?'Email me':'Emel saya')+'</a>':'')+'</div></section>\n  </main>\n  <footer>© '+new Date().getFullYear()+' '+title+'</footer>\n  <script src="script.js"><\/script>\n</body>\n</html>\n';
+ files.css=cssFor(pc,$('font').value);
+ files.js="// Kesan muncul semasa menatal (scroll reveal)\nvar io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.15}):null;\ndocument.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});\n";
+ renderEditor();preview();$('status').textContent=L('gen');var slug=(($('title').value||'laman-saya').toLowerCase().normalize('NFD').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'laman-saya');$('url').textContent='nama-anda.github.io/'+slug.slice(0,30);}
+function renderEditor(){$('editor').value=files[tab];}
+function saveEditor(){files[tab]=$('editor').value;}
+function preview(){var h=files.html.replace('<link rel="stylesheet" href="style.css">','<style>'+files.css.replace(/<\/style/gi,'<\\/style')+'</style>').replace('<script src="script.js"><\/script>','<script>'+files.js.replace(/<\/script/gi,'<\\/script')+'<\/script>');$('preview').srcdoc=h;}
+document.querySelectorAll('[data-tab]').forEach(function(b){b.onclick=function(){saveEditor();tab=b.dataset.tab;document.querySelectorAll('[data-tab]').forEach(function(x){x.classList.toggle('on',x===b);});renderEditor();};});
+document.querySelectorAll('[data-device]').forEach(function(b){b.onclick=function(){$('preview').className='preview '+(b.dataset.device==='desktop'?'':b.dataset.device);document.querySelectorAll('[data-device]').forEach(function(x){x.classList.toggle('on',x===b);});stepUp(4);};});
+document.querySelectorAll('[data-lang]').forEach(function(b){b.onclick=function(){LANG=b.dataset.lang;try{localStorage.setItem('ww-studio-lang',LANG);}catch(e){}i18n();loadPreset();};});
+SW.forEach(function(c){var b=document.createElement('button');b.type='button';b.style.setProperty('--c',c);b.title=c;b.setAttribute('aria-label',c);b.onclick=function(){$('primary').value=c;generate();stepUp(4);};$('swatches').appendChild(b);});
+['primary','font'].forEach(function(id){$(id).addEventListener('change',function(){generate();stepUp(4);});});
+['title','tagline','about','cards','cta','contact'].forEach(function(id){$(id).addEventListener('input',function(){stepUp(3);});});
+$('apply').onclick=function(){generate();stepUp(4);};
+$('reset').onclick=loadPreset;
+$('run').onclick=function(){saveEditor();preview();$('status').textContent=L('ran');};
+$('copy').onclick=function(){saveEditor();(navigator.clipboard?navigator.clipboard.writeText(files[tab]):Promise.reject()).then(function(){$('status').textContent=L('copied');},function(){$('status').textContent=L('nocopy');});};
+$('download').onclick=function(){saveEditor();if(typeof JSZip==='undefined'){$('status').textContent=L('nozip');return;}var z=new JSZip(),d=z.folder('laman-saya');d.file('index.html',files.html);d.file('style.css',files.css);d.file('script.js',files.js);d.folder('assets').file('.gitkeep','');
+ d.file('BACA-SAYA.txt',LANG==='en'?'WEB WIZARD · laman-saya\r\n\r\n1. Extract this ZIP.\r\n2. On github.com press New > name it laman-saya > Public > Create repository.\r\n3. Press "uploading an existing file" > drag ALL files from INSIDE laman-saya > Commit changes.\r\n4. Settings > Pages > Branch: main, / (root) > Save. Wait 1-2 minutes.\r\n5. Replace every "(example)" text with true information before sharing.\r\n':'WEB WIZARD · laman-saya\r\n\r\n1. Ekstrak ZIP ini.\r\n2. Di github.com tekan New > namakan laman-saya > Public > Create repository.\r\n3. Tekan "uploading an existing file" > seret SEMUA fail dari DALAM laman-saya > Commit changes.\r\n4. Settings > Pages > Branch: main, / (root) > Save. Tunggu 1-2 minit.\r\n5. Gantikan semua teks "(contoh)" dengan maklumat sebenar sebelum berkongsi.\r\n');
+ z.generateAsync({type:'blob'}).then(function(blob){var a=document.createElement('a'),u=URL.createObjectURL(blob);a.href=u;a.download='laman-saya.zip';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u);},1500);$('status').textContent=L('zipped');stepUp(6);});};
+i18n();loadPreset();stepUp(1);
+if(EMBED&&window.parent!==window){var post=function(){parent.postMessage({wwStudioH:document.documentElement.scrollHeight},'*');};if('ResizeObserver' in window)new ResizeObserver(post).observe(document.body);window.addEventListener('load',post);post();
+ document.querySelectorAll('a[href^="./index.html"]').forEach(function(a){a.target='_top';});}
+})();
+</script>
+</body>
+</html>
