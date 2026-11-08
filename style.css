@@ -1226,7 +1226,8 @@ form.survey fieldset.q.done .qn{background:#1f9d55;color:#fff}
 .ag-clock{position:absolute;left:69.7%;top:13.9%;width:12.5%;aspect-ratio:1;margin:-6.25% 0 0 -6.25%;border-radius:50%;border:2px dashed #2f3fd255;animation:spinPlain 14s linear infinite}
 .ag-art .hx-tw.t1{left:42%;top:8%}.ag-art .hx-tw.t2{left:76%;top:24%;animation-delay:.8s}.ag-art .hx-tw.t3{left:39%;top:62%;animation-delay:1.6s}
 .ag-chip{left:52%;top:78%;animation:hxPop .6s 1.1s cubic-bezier(.3,1.6,.5,1) both,hxBob 5s 2s ease-in-out infinite}
-@media(max-width:1200px) and (min-width:901px){.ag-art{width:72vw;right:-16vw;top:20px}.ag-hero .pg-hero-copy{max-width:500px}}
+@media(max-width:1300px) and (min-width:901px){.ag-art{width:min(58vw,760px);right:0;top:24px}.ag-hero .pg-hero-copy{max-width:min(500px,46vw)}}
+html{overflow-x:clip}
 @media(max-width:900px){.ag-hero{min-height:0}.ag-art{position:relative;order:-1;right:auto;top:auto;width:135%;margin:-20px 0 -8% -35%}}
 
 /* Perkongsian: hero besar seperti Utama */
