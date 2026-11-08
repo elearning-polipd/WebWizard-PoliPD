@@ -188,7 +188,7 @@ html.embed main{padding:4px 8px 16px}
   <p class="foot">Web Wizard · From Idea to Live · Unit e-Learning POLIPD</p>
 </main>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="./jszip.min.js"></script>
 <script>
 (function(){
 'use strict';
@@ -214,7 +214,7 @@ var TYPES={
  pdp:{img:'pdp',n:['📚 Laman PdP','📚 Teaching & learning'],c:'#163bcf'},
  kerja:{img:'kerja',n:['🗂️ Pengurusan kerja','🗂️ Work management'],c:'#0d9488'},
  portfolio:{img:'portfolio',n:['👩‍🏫 Portfolio','👩‍🏫 Portfolio'],c:'#7c3aed'},
- acara:{img:'',n:['🎉 Acara','🎉 Event'],c:'#e33445'}};
+ acara:{img:'acara',n:['🎉 Acara','🎉 Event'],c:'#e33445'}};
 var STYLES={min:{n:['Minimal profesional','Professional minimalist'],theme:'light',bg:'#ffffff',corners:'soft',hero:'split',card:'line'},
  fun:{n:['Mesra dan berwarna','Friendly and colourful'],theme:'light',bg:'#fff7ed',corners:'round',hero:'centre',card:'tint'},
  bold:{n:['Tajuk besar dan kontras','Bold headings and contrast'],theme:'dark',bg:'#0b0b0b',corners:'sharp',hero:'split',card:'thick'}};
@@ -305,15 +305,17 @@ function regen(){if(P.codeLocked&&P.manual){FILES=JSON.parse(JSON.stringify(P.ma
 function preview(){var h=FILES.html.replace('<link rel="stylesheet" href="style.css">','<style>'+FILES.css.replace(/<\/style/gi,'<\\/style')+'</style>').replace('<script src="script.js"><\/script>','<script>'+FILES.js.replace(/<\/script/gi,'<\\/script')+'<\/script>');$('preview').srcdoc=h;}
 function change(){save();regen();}
 
+window.addEventListener('message',function(e){if(e.source!==window.parent||!e.data||e.data.type!=='ww-kenali-preferences')return;try{window.__wwKenaliBridge=JSON.stringify(e.data.payload);store.set('ww-sesi-v1',window.__wwKenaliBridge);if(AREA==='plan')renderArea();}catch(x){}});
 /* ---------- import from Kenali laman web ---------- */
-function readKenali(){var raw=store.get('ww-sesi-v1');if(!raw)return null;try{var s=JSON.parse(raw);}catch(e){return null;}
- var type=/PdP/i.test(s.type||'')?'pdp':/kerja/i.test(s.type||'')?'kerja':/Portfolio/i.test(s.type||'')?'portfolio':'';
+function readKenali(){var raw=store.get('ww-sesi-v1')||window.__wwKenaliBridge;if(!raw)return null;try{var s=JSON.parse(raw);}catch(e){return null;}
+ var type=/PdP/i.test(s.type||'')?'pdp':/kerja/i.test(s.type||'')?'kerja':/Portfolio/i.test(s.type||'')?'portfolio':/Acara|Event/i.test(s.type||'')?'acara':'';
  var style={'Minimal profesional':'min','Mesra dan berwarna':'fun','Tajuk besar dan kontras':'bold'}[s.style]||'';
  var items=[s.p1,s.p2,s.p3].filter(Boolean);
- var o={type:type,style:style,cols:Array.isArray(s.cols)?s.cols.filter(function(c){return /^#[0-9a-f]{6}$/i.test(c);}):[],feats:Array.isArray(s.feats)?s.feats:[],title:s.title||'',tagline:s.desc||'',cta:s.btn||'',action:s.url||'',contact:s.contact||'',purpose:s.goal||'',audience:s.aud||'',items:items};
+ var o={type:type,style:style,cols:Array.isArray(s.cols)?s.cols.filter(function(c){return /^#[0-9a-f]{6}$/i.test(c);}):[],feats:Array.isArray(s.feats)?s.feats:[],title:s.title||'',tagline:s.desc||'',cta:s.btn||'',action:s.url||'',contact:s.contact||'',purpose:s.goal||'',audience:s.aud||'',items:items,features:Array.isArray(s.feats)?s.feats:[],designNotes:s.designNotes||'',referenceStyle:s.style||''};
  var any=o.type||o.style||o.title||o.cols.length||items.length;return any?o:null;}
 function applyKenali(k,pick){if(pick.typeStyle){if(k.type){var keep=P.sections;P.type=k.type;if(confirmSections)P.sections=presetSections(k.type);}if(k.style)applyStyle(k.style,true);}
- if(pick.colours&&k.cols.length){P.primary=k.cols[0];}
+ if(pick.colours&&k.cols.length){P.primary=k.cols[0];P.secondary=k.cols[1]||P.secondary;}
+ if(pick.typeStyle){P.kenaliFeatures=k.features||[];P.kenaliDesignNotes=k.designNotes||'';}
  if(pick.content){['title','tagline','cta','action','contact','purpose','audience'].forEach(function(f){if(k[f])P[f]=k[f];});
   if(k.items.length){var cs=P.sections.filter(function(s){return s.kind==='cards'||s.kind==='list';})[0];if(!cs){cs={id:uid(),kind:'cards',title:X('Perkara utama','Key items'),items:[]};P.sections.splice(1,0,cs);}cs.items=k.items.map(function(t){return it(t,'');});}}
  change();}
@@ -456,11 +458,12 @@ function bindTest(){renderChecks();document.querySelectorAll('[data-man]').forEa
 
 function areaPublish(){return '<h2>5 · '+X('Terbit','Publish')+'</h2><p class="hint">'+X('Muat turun laman anda, kemudian terbitkan di GitHub Pages.','Download your site, then publish it on GitHub Pages.')+'</p>'+
   '<div class="box y"><b>'+X('Muat turun','Download')+'</b><p class="hint" style="margin:4px 0 10px">'+X('ZIP mengandungi index.html, style.css, script.js, folder assets, panduan BACA-SAYA dan fail projek untuk disunting semula.','The ZIP has index.html, style.css, script.js, an assets folder, a BACA-SAYA guide and a project file to edit again later.')+'</p><div class="actions" style="margin:0"><button class="btn" type="button" id="dlZip">⬇ '+X('Muat turun laman-saya.zip','Download laman-saya.zip')+'</button></div></div>'+
+  '<div class="box"><b>'+X('Fail kod berasingan','Individual code files')+'</b><p class="hint">'+X('Muat turun HTML, CSS atau JavaScript secara berasingan jika perlu.','Download HTML, CSS or JavaScript separately if needed.')+'</p><div class="actions"><button type="button" class="btn sm white" data-codefile="html">index.html</button><button type="button" class="btn sm white" data-codefile="css">style.css</button><button type="button" class="btn sm white" data-codefile="js">script.js</button></div></div>'+
   '<div class="box"><b>'+X('Simpan dan sambung kemudian','Save and continue later')+'</b><p class="hint" style="margin:4px 0 10px">'+X('Projek disimpan automatik dalam pelayar ini. Eksport fail projek untuk menyambung di komputer lain atau selepas bengkel.','Your project is saved automatically in this browser. Export the project file to continue on another computer or after the workshop.')+'</p><div class="actions" style="margin:0"><button class="btn sm white" type="button" id="exProj">⬇ '+X('Eksport projek (.json)','Export project (.json)')+'</button><label class="btn sm white">⬆ '+X('Import projek','Import project')+'<input type="file" id="imProj" accept=".json,application/json" hidden></label><button class="btn sm red" type="button" id="resetProj">↺ '+X('Mula semula','Start over')+'</button></div></div>'+
   '<h3>'+X('Terbitkan di GitHub Pages','Publish on GitHub Pages')+'</h3><ol class="steps5"><li><b>1</b><span>'+X('Ekstrak <code>laman-saya.zip</code>.','Extract <code>laman-saya.zip</code>.')+'</span></li><li><b>2</b><span>'+X('Di GitHub, tekan <kbd>New</kbd>, namakan repositori <code>laman-saya</code>, pilih Public.','On GitHub, press <kbd>New</kbd>, name the repository <code>laman-saya</code>, choose Public.')+'</span></li><li><b>3</b><span>'+X('Tekan <i>uploading an existing file</i>, seret SEMUA fail dari dalam folder, kemudian <i>Commit changes</i>.','Press <i>uploading an existing file</i>, drag ALL files from inside the folder, then <i>Commit changes</i>.')+'</span></li><li><b>4</b><span>'+X('<i>Settings → Pages</i> → Branch <code>main</code> / root → <i>Save</i>. Tunggu 1–2 minit.','<i>Settings → Pages</i> → Branch <code>main</code> / root → <i>Save</i>. Wait 1–2 minutes.')+'</span></li></ol>'+
   '<div class="actions"><a class="btn blue" href="./index.html#github" target="_top">'+X('Buka panduan GitHub bergambar →','Open the GitHub picture guide →')+'</a></div>'+
   '<details class="more" style="margin-top:12px"><summary>'+X('Prompt AI untuk penambahbaikan selepas bengkel','AI prompt for improvements after the workshop')+'</summary>'+promptBox('pImprove2',improvePrompt(),true)+'</details>';}
-function bindPublish(){$('dlZip').onclick=downloadZip;$('exProj').onclick=function(){dl(new Blob([JSON.stringify(P,null,2)],{type:'application/json'}),'web-wizard-projek.json');flash(X('Fail projek dimuat turun.','Project file downloaded.'));};
+function bindPublish(){$('dlZip').onclick=downloadZip;document.querySelectorAll('[data-codefile]').forEach(function(b){b.onclick=function(){saveEditor();var k=b.dataset.codefile;dl(new Blob([FILES[k]],{type:'text/plain;charset=utf-8'}),{html:'index.html',css:'style.css',js:'script.js'}[k]);};});$('exProj').onclick=function(){dl(new Blob([JSON.stringify(P,null,2)],{type:'application/json'}),'web-wizard-projek.json');flash(X('Fail projek dimuat turun.','Project file downloaded.'));};
  $('imProj').onchange=function(){var f=this.files[0];if(!f)return;var r=new FileReader();r.onload=function(){try{var o=JSON.parse(r.result);if(!o||!o.sections)throw 0;o.v=1;P=o;change();renderArea();flash(X('Projek diimport.','Project imported.'));}catch(e){flash(X('Fail ini bukan fail projek Web Wizard.','This is not a Web Wizard project file.'),true);}};r.readAsText(f);this.value='';};
  var rb=$('resetProj');rb.onclick=function(){if(rb.dataset.sure!=='1'){rb.dataset.sure='1';rb.textContent=X('Tekan sekali lagi untuk padam projek','Press again to delete the project');setTimeout(function(){if(rb.isConnected){rb.dataset.sure='';rb.textContent='↺ '+X('Mula semula','Start over');}},3000);return;}store.del(KEY);P=presetProject(P.type,P.style);change();renderArea();flash(X('Projek baharu dimulakan.','A new project was started.'));};
  bindCopies();}

@@ -1507,3 +1507,17 @@ form.survey fieldset.q.done .qn{background:#1f9d55;color:#fff}
 .ww-toc-links a{display:block;padding:10px 12px;border-radius:9px;background:#e8edff;color:#10183b;text-decoration:none;font-weight:700}
 .ww-toc-links a:hover,.ww-toc-links a:focus-visible{background:#ffdf35}
 @media(max-width:650px){.ww-toc-links{grid-template-columns:1fr}}
+
+/* v42: focused homepage hero; original artwork preserved */
+.hx{--hxh:clamp(430px,45vw,610px);overflow:hidden}
+.hx-in{padding:38px 0 52px;min-height:calc(var(--hxh) - 46px)}
+.hx-h1{font-size:clamp(3rem,7.1vw,6.5rem);line-height:.96}
+.hx-sub{margin-top:.25em}
+.hx-lead{max-width:430px;margin-top:18px}
+.hx-cta{margin-top:20px}
+.hx-art img{object-fit:contain;object-position:center right;filter:contrast(1.07) saturate(1.07)}
+.hx-chip.c1,.hx-chip.c2{display:none}
+.ww-welcome{padding-top:52px;padding-bottom:36px}
+.ww-welcome .ww-toc{margin:20px 0 26px}
+@media(max-width:900px){.hx{--hxh:580px}.hx-in{padding:35px 0 55px}.hx-art{opacity:.48;filter:saturate(1.08)}.hx-h1{font-size:clamp(3rem,12vw,5rem)}.ww-welcome{padding-top:35px}}
+@media(max-width:520px){.hx{--hxh:540px}.hx-art{opacity:.25}.hx-in>*{max-width:95%}.hx-lead{font-size:1rem}}

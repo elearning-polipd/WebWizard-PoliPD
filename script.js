@@ -66,7 +66,7 @@ if(S.scheduleVersion!==2){
   if(previousIndex>=7)S.cur=({7:8,8:8,9:7,10:9,11:10,12:11})[previousIndex];
   S.scheduleVersion=2;
 }
-function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}if(typeof wwSendKenali==='function')wwSendKenali();}
 function v(k,f){var x=(S[k]||'').toString().trim();return x||f;}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]});}
 function P(id,label,text){return '<div class="prompt"><header><span>'+label+'</span><button class="btn sm" type="button" data-copy="'+id+'">Salin</button></header><pre id="'+id+'">'+esc(text)+'</pre></div>';}
@@ -1575,6 +1575,8 @@ bindWorks();
 
 /* ===== Studio Builder (dibenamkan) ===== */
 function studioEmbed(){return '<div class="sb-wrap"><iframe class="sb-frame" id="sb-frame" title="Studio Builder" src="./studio.html?embed=1&lang='+(english?'en':'ms')+'" loading="eager"></iframe></div><p class="hint" style="margin-top:10px">'+LX(['Skrin kecil? ','Small screen? '])+'<a href="./studio.html?lang='+(english?'en':'ms')+'" target="_blank" rel="noopener">'+LX(['Buka Studio Builder dalam tab baharu ↗','Open Studio Builder in a new tab ↗'])+'</a></p>';}
+function wwSendKenali(){var f=document.getElementById('sb-frame');if(f&&f.contentWindow){try{f.contentWindow.postMessage({type:'ww-kenali-preferences',payload:S},'*');}catch(e){}}}
+document.addEventListener('load',function(e){if(e.target&&e.target.id==='sb-frame')wwSendKenali();},true);
 window.addEventListener('message',function(e){var d=e.data;if(!d||typeof d.wwStudioH!=='number')return;var f=document.getElementById('sb-frame');if(f&&e.source===f.contentWindow)f.style.height=Math.max(600,Math.ceil(d.wwStudioH))+'px';});
 window.addEventListener('popstate',function(){var h=(location.hash||'').slice(1);if(h!==currentRoute){currentRoute=h;route(true);}});
 document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a)return;var r=a.getAttribute('href').slice(1);if(!r||(ROUTES.indexOf(r)<0&&r!=='utama'&&!PAGES[r]))return;e.preventDefault();go(r);});
