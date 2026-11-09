@@ -1646,3 +1646,81 @@ html{overflow-x:clip}
     object-position: center;
   }
 }
+
+/* =============================================================
+   Web Wizard — Agenda + Perkongsian hero scale alignment
+   Benchmark: Utama hero. Scoped overrides only; 10 Nov 2026.
+   ============================================================= */
+@media (min-width: 901px) {
+  /* Agenda: undo the previous 55vw / 82% and 53vw / 75% shrink. */
+  #agenda-page .ag-hero.wrapx .ag-art {
+    position: absolute !important;
+    width: min(69vw, 1120px) !important;
+    height: calc(100% - var(--tick, 46px)) !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: var(--tick, 46px) !important;
+    left: auto !important;
+    margin: 0 !important;
+    aspect-ratio: auto !important;
+    transform: none !important;
+  }
+  #agenda-page .ag-hero .ag-art img {
+    width: 100%; height: 100%; object-fit: contain;
+    object-position: right bottom;
+    -webkit-mask-image: none !important; mask-image: none !important;
+  }
+  /* Sharing: remove the 64% image cap and use Utama's hero height. */
+  .workspace-intro.wi-big .wi-art {
+    position: absolute !important;
+    width: min(69vw, 1120px) !important;
+    max-width: none !important;
+    height: calc(100% - var(--tick, 46px)) !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: var(--tick, 46px) !important;
+    left: auto !important;
+    margin: 0 !important;
+    aspect-ratio: auto !important;
+  }
+  .workspace-intro.wi-big .wi-art img {
+    width: 100%; height: 100%; object-fit: contain;
+    object-position: right bottom;
+    -webkit-mask-image: none !important; mask-image: none !important;
+  }
+  /* Keep copy legible above any transparent parts of the art. */
+  #agenda-page .ag-hero .pg-hero-copy,
+  .workspace-intro.wi-big > :not(.wi-art):not(.wi-tick) {
+    position: relative; z-index: 3;
+  }
+}
+@media (min-width: 901px) and (max-width: 1150px) {
+  #agenda-page .ag-hero.wrapx .ag-art,
+  .workspace-intro.wi-big .wi-art {
+    width: 65vw !important;
+  }
+}
+@media (max-width: 900px) {
+  /* Tablet/phone: full-width image above copy, no artificial shrinking. */
+  #agenda-page .ag-hero.wrapx .ag-art {
+    width: calc(100% + 36px) !important;
+    max-width: none !important;
+    height: auto !important;
+    aspect-ratio: 1672 / 941 !important;
+  }
+  .workspace-intro.wi-big .wi-art {
+    position: relative !important;
+    inset: auto !important;
+    width: calc(100% + 36px) !important;
+    max-width: none !important;
+    height: auto !important;
+    aspect-ratio: 1672 / 941 !important;
+    margin: 0 -18px 14px !important;
+  }
+  .workspace-intro.wi-big .wi-art img,
+  #agenda-page .ag-hero .ag-art img {
+    display: block; width: 100%; height: 100%;
+    object-fit: contain; object-position: center;
+    -webkit-mask-image: none !important; mask-image: none !important;
+  }
+}
