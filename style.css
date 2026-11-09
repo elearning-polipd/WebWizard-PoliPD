@@ -1522,3 +1522,14 @@ html{overflow-x:clip}
 .ww-welcome .ww-toc{margin:20px 0 26px}
 @media(max-width:900px){.hx{--hxh:580px}.hx-in{padding:35px 0 55px}.hx-art{opacity:.48;filter:saturate(1.08)}.hx-h1{font-size:clamp(3rem,12vw,5rem)}.ww-welcome{padding-top:35px}}
 @media(max-width:520px){.hx{--hxh:540px}.hx-art{opacity:.25}.hx-in>*{max-width:95%}.hx-lead{font-size:1rem}}
+
+/* OmniFramer Studio Pro (pilihan lanjutan di Studio praktikal) */
+.omni-card{margin:28px 0 8px;padding:18px;border:2px solid var(--ink,#10183b);border-radius:14px;background:#fff;box-shadow:5px 5px 0 var(--ink,#10183b)}
+.omni-head{display:flex;gap:14px;align-items:flex-start}.omni-head h3{margin:0 0 4px}.omni-head p{margin:0;font-size:.92rem}
+.omni-badge{flex:none;display:grid;place-items:center;width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,#f59e0b,#f43f5e,#4f46e5);color:#fff;font-weight:800;letter-spacing:.06em}
+.omni-actions{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 6px}
+.omni-slot{margin-top:14px}.omni-frame{display:block;width:100%;height:min(88vh,900px);min-height:560px;border:2px solid var(--ink,#10183b);border-radius:12px;background:#0b0f19}
+
+/* Kenali: ajakan ke Studio */
+.kx-go{margin:28px 0 8px;padding:20px;border:2px solid var(--ink,#10183b);border-radius:14px;background:var(--yellow,#ffdf35);box-shadow:5px 5px 0 var(--ink,#10183b)}
+.kx-go h3{margin:0 0 6px}.kx-go p{margin:0 0 12px}
