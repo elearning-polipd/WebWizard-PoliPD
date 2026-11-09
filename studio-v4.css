@@ -1,0 +1,34 @@
+/* Web Wizard Studio v4 — focused icon workspace, 2026-11-09 */
+#studio .workspace-tools{display:none!important}
+#studio .studio-body{display:flex!important;flex-direction:column!important;overflow:visible!important;min-height:0!important}
+#studio .studio-body>.controls{display:none!important}
+#studio .preview-stage{display:block!important;min-height:650px!important;width:100%!important;padding:18px clamp(12px,3vw,38px) 45px!important;overflow:visible!important}
+#studio .preview-shell{max-width:1200px;margin:auto}
+#studio .preview-shell iframe{min-height:720px;width:100%}
+.ww4-workspace{background:#fffdf9;border-bottom:1px solid #eadfd7;padding:15px clamp(12px,3vw,38px);position:relative;z-index:2}
+.ww4-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.ww4-heading strong{font-size:clamp(17px,2vw,23px);font-weight:850;letter-spacing:-.03em;color:#15223b}
+.ww4-heading p{margin:3px 0 0;font-size:14px;color:#626775}
+.ww4-actions{display:flex;gap:8px;flex-wrap:wrap}
+.ww4-actions button,.ww4-close{border:1px solid #e7ddd6;background:#fff;border-radius:10px;padding:9px 12px;font-weight:700;cursor:pointer;color:#19243b}
+.ww4-actions button:hover,.ww4-close:hover{background:#fff0e9}
+.ww4-toolbar{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.ww4-tool{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;min-height:94px;border:2px solid #f0e5dd;border-radius:15px;background:#fff;cursor:pointer;color:#15223b;transition:transform .15s,border-color .15s,background .15s}
+.ww4-tool:hover{transform:translateY(-2px);border-color:#ff9e8d}
+.ww4-tool[aria-selected=true]{background:#fff0e9;border-color:#ff6c5b;box-shadow:0 3px 0 #ff6c5b33}
+.ww4-tool img{width:42px;height:42px;object-fit:contain}
+.ww4-tool span{font-size:13px;font-weight:800}
+.ww4-panel{margin-top:12px;padding:18px;border:1px solid #eee0d6;background:#fff;border-radius:16px;box-shadow:0 8px 28px #1b22300c}
+.ww4-panel[hidden]{display:none!important}
+.ww4-panelhead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+.ww4-panelhead h3{font-size:20px;letter-spacing:-.03em;margin:0;color:#19243b}
+.ww4-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;align-items:start}
+.ww4-fields .control-group{display:block!important;min-width:0;margin:0!important;padding:12px!important;border:1px solid #f1e8e1!important;border-radius:12px;box-shadow:none!important}
+.ww4-fields .control-group label{font-size:15px!important}
+.ww4-fields .control-group input,.ww4-fields .control-group textarea,.ww4-fields .control-group select{font-size:16px!important;max-width:100%}
+.ww4-fields .control-help{font-size:13px!important}
+.ww4-tip{font-size:13px;color:#656b76;margin:10px 0 0}
+#studio .preview-heading h2{font-size:clamp(22px,2.6vw,31px)!important}
+#studio .preview-note{font-size:13px!important}
+@media(max-width:700px){.ww4-toolbar{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.ww4-tool{min-height:80px}.ww4-tool img{width:34px;height:34px}.ww4-tool span{font-size:12px}.ww4-fields{grid-template-columns:1fr}.ww4-panel{padding:12px}.ww4-heading p{font-size:13px}#studio .preview-stage{padding:12px 8px 30px!important}#studio .preview-shell iframe{min-height:610px}}
+@media(prefers-reduced-motion:reduce){.ww4-tool{transition:none}}
