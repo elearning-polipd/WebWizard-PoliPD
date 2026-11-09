@@ -1533,3 +1533,47 @@ html{overflow-x:clip}
 /* Kenali: ajakan ke Studio */
 .kx-go{margin:28px 0 8px;padding:20px;border:2px solid var(--ink,#10183b);border-radius:14px;background:var(--yellow,#ffdf35);box-shadow:5px 5px 0 var(--ink,#10183b)}
 .kx-go h3{margin:0 0 6px}.kx-go p{margin:0 0 12px}
+
+/* ===== Hero standard: Utama · Agenda · Perkongsian (sama tinggi, imej besar di kanan, teks di kiri, jalur ticker) ===== */
+:root{--heroH:clamp(500px,52vw,720px);--tick:46px}
+@media(min-width:901px){
+ /* Utama */
+ .hx{--hxh:var(--heroH)!important;min-height:var(--heroH)!important}
+ .hx-art{height:calc(100% - var(--tick))!important;width:auto!important;top:0!important;bottom:auto!important;right:0!important;margin:0!important}
+ .hx-in::before{display:none}
+ .hx-in{min-height:calc(var(--heroH) - var(--tick))!important;padding:36px 0 32px}
+ .hx-in>*{max-width:min(560px,46vw)}
+ /* Agenda: jalur penuh seperti Utama */
+ .ag-hero.wrapx{width:100%;max-width:none;margin:0;min-height:var(--heroH);padding:28px max(18px,calc((100% - 1180px)/2)) calc(var(--tick) + 28px);background:#fdf5ea;border-bottom:3px solid var(--ink);overflow:hidden;display:grid;align-content:center;isolation:isolate}
+ .ag-hero.wrapx::before{content:"";position:absolute;inset:0;z-index:-1;background-image:linear-gradient(#10183b0a 1px,transparent 1px),linear-gradient(90deg,#10183b0a 1px,transparent 1px);background-size:28px 28px}
+ .ag-art{position:absolute!important;top:0!important;bottom:var(--tick);right:0!important;left:auto;width:auto!important;height:calc(100% - var(--tick));aspect-ratio:1672/941;margin:0!important}
+ .ag-art img{object-fit:contain;object-position:right center}
+ .ag-hero .pg-hero-copy{max-width:min(540px,44vw)!important}
+ .ag-hero .hx-ticker{left:0;right:0}
+ /* Perkongsian */
+ .workspace-intro.wi-big{min-height:var(--heroH);padding-top:28px;padding-bottom:calc(var(--tick) + 28px)!important;justify-content:center}
+ .workspace-intro.wi-big .wi-art{top:0!important;bottom:var(--tick)!important;right:0!important;width:auto!important;height:calc(100% - var(--tick));aspect-ratio:1672/941;max-width:64%}
+ .workspace-intro.wi-big .wi-art img{object-fit:contain;object-position:right center}
+ .workspace-intro.wi-big>*:not(.wi-art):not(.wi-tick){max-width:min(540px,44vw)}
+ .wi-big .wi-badge{display:none}
+ /* tajuk & label yang sama */
+ .ag-hero .ag-h1,.workspace-intro.wi-big h1{font-size:clamp(2.8rem,5.6vw,5.2rem);line-height:.95;letter-spacing:-.05em}
+ .workspace-intro.wi-big .eyebrow{display:inline-flex;align-self:flex-start;align-items:center;gap:8px;padding:6px 12px;border:2px solid var(--ink);border-radius:999px;background:#fff;color:var(--ink)!important;font-size:.72rem;letter-spacing:.12em;margin:0 0 14px}
+}
+/* Hero standard (telefon & tablet kecil): imej penuh di atas, teks di bawah, ticker di bawah sekali */
+@media(max-width:900px){
+ .hx{display:flex!important;flex-direction:column;min-height:0!important;padding-bottom:var(--tick)}
+ .hx-art{position:relative!important;order:-1;width:100%!important;height:auto!important;aspect-ratio:1672/941;margin:0!important;right:auto!important;top:auto!important;opacity:1!important;filter:none!important;transform:none!important}
+ .hx-in{min-height:0!important;margin-top:0!important;padding:16px 0 26px!important}
+ .hx-in>*{max-width:none!important}
+ .ag-hero.wrapx{width:100%;max-width:none;margin:0;padding:0 18px calc(var(--tick) + 26px);background:#fdf5ea;border-bottom:3px solid var(--ink);overflow:hidden;display:flex!important;flex-direction:column;min-height:0}
+ .ag-art{position:relative!important;order:-1;width:calc(100% + 36px)!important;height:auto!important;aspect-ratio:1672/941;margin:0 -18px 14px!important;right:auto!important;top:auto!important}
+ .ag-art img{object-fit:contain}
+ .ag-hero .hx-ticker{left:0;right:0}
+ .workspace-intro.wi-big{margin-left:-18px;margin-right:-18px;border:0!important;border-bottom:3px solid var(--ink)!important;border-radius:0!important;box-shadow:none!important;padding:0 18px 74px!important}
+ .workspace-intro.wi-big .wi-art{margin:0 -18px 14px!important}
+ .wi-big .wi-badge{display:none}
+ .workspace:has(.wi-big){padding-top:0!important}
+ .workspace-intro.wi-big h1{font-size:clamp(2.4rem,9vw,3.6rem);line-height:.95}
+ .workspace-intro.wi-big .eyebrow{display:inline-flex;padding:5px 11px;border:2px solid var(--ink);border-radius:999px;background:#fff;color:var(--ink)!important;font-size:.7rem;margin:0 0 10px}
+}
