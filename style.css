@@ -1724,3 +1724,31 @@ html{overflow-x:clip}
     -webkit-mask-image: none !important; mask-image: none !important;
   }
 }
+
+/* ===== Agenda and Perkongsian hero art: same box as Utama =====
+   Utama sizes its art from the hero height (full height above the ticker, width from the
+   1672:941 image). Agenda and Perkongsian were capped at 65vw / 69vw, which shrank the image
+   and left a gap above it. This block must stay last. */
+@media (min-width: 901px) {
+  #agenda-page .ag-hero.wrapx .ag-art,
+  .workspace-intro.wi-big .wi-art {
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: var(--tick, 46px) !important;
+    left: auto !important;
+    width: auto !important;
+    max-width: none !important;
+    height: calc(100% - var(--tick, 46px)) !important;
+    aspect-ratio: 1672 / 941 !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
+  #agenda-page .ag-hero .ag-art img,
+  .workspace-intro.wi-big .wi-art img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: right center;
+  }
+}
