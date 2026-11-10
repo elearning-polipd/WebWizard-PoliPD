@@ -1417,6 +1417,10 @@ function gxImg(t,s,sm){return './assets/sample-'+t.id+'-'+gxSid(s)+(sm?'-sm':'')
    style palette. Key is '<type>-<style>'. Empty while every sample matches
    its style; add an entry here if an image is ever redrawn off-palette. */
 var GX_PAL_FIX={
+ 'acara-bold':[['#FBF8E3','Latar krim','Cream background'],['#0C0C0C','Teks','Text'],['#FFE30C','Utama kuning','Yellow primary'],['#FC8424','Aksen oren','Orange accent']],
+ 'pdp-bold':[['#0C0C0C','Latar','Background'],['#FCCC0C','Utama','Primary'],['#FFFFFF','Teks','Text'],['#9C9C9C','Garisan','Lines']],
+ 'portfolio-bold':[['#0C0C0C','Latar','Background'],['#F52828','Utama merah','Red primary'],['#FFFFFF','Teks','Text'],['#6C6C6C','Kelabu foto','Photo grey']],
+
  'portfolio-min':[['#FFFFFF','Latar','Background'],['#0B0B0B','Teks','Text'],['#CFF75F','Aksen hijau limau','Lime accent'],['#949776','Hijau sage','Sage green']],
  'acara-min':[['#FFFFFF','Latar','Background'],['#111A3A','Teks','Text'],['#5A24A1','Aksen ungu','Purple accent'],['#E0D8FF','Ungu lembut','Soft purple']]
 };
@@ -1592,7 +1596,7 @@ bindWorks();
 
 
 /* ===== Studio Builder (dibenamkan) ===== */
-function studioEmbed(){return '<div class="sb-wrap"><iframe class="sb-frame" id="sb-frame" title="Studio Builder" src="./studio.html?v=51&embed=1&lang='+(english?'en':'ms')+'" loading="eager"></iframe></div><p class="hint" style="margin-top:10px">'+LX(['Skrin kecil? ','Small screen? '])+'<a href="./studio.html?v=51&lang='+(english?'en':'ms')+'" target="_blank" rel="noopener">'+LX(['Buka Studio Builder dalam tab baharu ↗','Open Studio Builder in a new tab ↗'])+'</a></p>'+omniEmbed();}
+function studioEmbed(){return '<div class="sb-wrap"><iframe class="sb-frame" id="sb-frame" title="Studio Builder" src="./studio.html?v=52&embed=1&lang='+(english?'en':'ms')+'" loading="eager"></iframe></div><p class="hint" style="margin-top:10px">'+LX(['Skrin kecil? ','Small screen? '])+'<a href="./studio.html?v=52&lang='+(english?'en':'ms')+'" target="_blank" rel="noopener">'+LX(['Buka Studio Builder dalam tab baharu ↗','Open Studio Builder in a new tab ↗'])+'</a></p>'+omniEmbed();}
 /* OmniFramer Studio Pro: pilihan lanjutan, dimuat hanya apabila ditekan (fail ./omniframer.html dalam repo) */
 function omniEmbed(){return '<section class="omni-card" aria-labelledby="omni-h"><div class="omni-head"><span class="omni-badge">PRO</span><div><h3 id="omni-h">OmniFramer Studio Pro</h3><p>'+LX(['Pilihan lanjutan untuk peserta yang sudah biasa: 5 jenis laman, 3 gaya (Neobrutalism, Claymorphism, Bento), ilustrasi SVG, tipografi dan eksport kod.','An advanced option for confident participants: 5 site types, 3 styles (Neobrutalism, Claymorphism, Bento), SVG illustrations, typography and code export.'])+'</p></div></div>'+
  '<div class="omni-actions"><button type="button" class="btn blue" id="omni-load">'+LX(['▶ Buka OmniFramer di sini','▶ Open OmniFramer here'])+'</button><a class="btn" href="./omniframer.html" target="_blank" rel="noopener">'+LX(['Skrin penuh ↗','Full screen ↗'])+'</a></div>'+
