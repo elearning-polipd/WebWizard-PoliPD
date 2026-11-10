@@ -393,3 +393,25 @@
   .abm-cards{grid-template-columns:1fr}
   .abm-plus{display:none}
 }
+
+/* ---------- Fasilitator: Fokus & pendekatan ---------- */
+.fk-h{margin:0 0 6px;font:800 clamp(1.4rem,2.6vw,1.9rem)/1.15 var(--display,system-ui);letter-spacing:-.02em}
+.fk-sub{margin:0 0 20px;max-width:62ch;font-size:1.02rem}
+.fk-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:20px}
+.fk-card{display:flex;flex-direction:column;border:2px solid var(--ink,#10183b);border-radius:14px;overflow:hidden;background:#fff;box-shadow:5px 5px 0 var(--ink,#10183b);transition:transform .2s ease,box-shadow .2s ease}
+.fk-card:hover{transform:translateY(-3px);box-shadow:7px 7px 0 var(--ink,#10183b)}
+.fk-shot{display:block;aspect-ratio:16/9;overflow:hidden;border-bottom:2px solid var(--ink,#10183b);background:#e8efff}
+.fk-shot img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
+.fk-body{display:flex;flex-direction:column;gap:6px;padding:14px 16px 16px;flex:1}
+.fk-tag{align-self:flex-start;padding:4px 11px;border:2px solid var(--ink,#10183b);border-radius:999px;font:800 .78rem/1.2 var(--display,system-ui);background:#e8efff}
+.fk-card.c-yellow .fk-tag{background:var(--yellow,#ffd43b)}
+.fk-card.c-red .fk-tag{background:#ffd9d4}
+.fk-card.c-green .fk-tag{background:#d3f0dd}
+.fk-work{margin:4px 0 0;font-size:1.05rem}
+.fk-work span,.fk-fit span{color:#6b7280;font-size:.85rem}
+.fk-work b{font:800 1.1rem/1.25 var(--display,system-ui)}
+.fk-desc{margin:0;font-size:.97rem;line-height:1.5}
+.fk-fit{margin:0;font-size:.9rem}
+.fk-body .btn{align-self:flex-start;margin-top:auto}
+@media(max-width:760px){.fk-grid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.fk-card{transition:none}}
