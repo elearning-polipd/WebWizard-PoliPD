@@ -228,8 +228,18 @@
     pending = setTimeout(function () { refresh(force); }, 90);
   }
 
-  /* ---------- the 01-02-03 process flow on the home page ---------- */
+  /* ---------- the five-stage process flow on the landing page ----------
+     Same five stages as the Agenda: Mula → Kenali → Bina → Terbit → Kongsi.
+     The three cards below light up as the rocket passes their stage. ---------- */
   var flowTimer = 0, flowStep = 0, flowBuilt = false, flowPlayed = false;
+
+  var STAGES = [
+    { bm: 'Mula',   en: 'Start',   sub: ['Sedia dan berkenalan', 'Get set and say hello'],      c: 'blue',   go: 'persediaan', card: 0 },
+    { bm: 'Kenali', en: 'Explore', sub: ['Faham asas laman web', 'Learn how websites work'],    c: 'yellow', go: 'kenali',     card: 1 },
+    { bm: 'Bina',   en: 'Build',   sub: ['Bina, uji dan muat turun', 'Build, test and download'], c: 'red',  go: 'praktikal',  card: 2 },
+    { bm: 'Terbit', en: 'Publish', sub: ['Dari fail ke pautan awam', 'From file to public link'], c: 'green', go: 'terbit',    card: 3 },
+    { bm: 'Kongsi', en: 'Share',   sub: ['Tunjuk, tanya dan maklum balas', 'Show, ask and give feedback'], c: 'ink', go: 'kongsi', card: 4 }
+  ];
 
   function buildFlow() {
     var grid = document.querySelector('.home-grid');
@@ -237,12 +247,10 @@
     flowBuilt = true;
 
     var cards = Array.prototype.slice.call(grid.children);
-    var n = cards.length;
-    if (n < 2) return;
+    var n = STAGES.length;
 
     var flow = document.createElement('div');
     flow.className = 'hm-flow';
-    flow.setAttribute('aria-hidden', 'true');
 
     var rail = document.createElement('div');
     rail.className = 'hm-flow-rail';
@@ -256,17 +264,26 @@
     var rocket = document.createElement('span');
     rocket.className = 'hm-rocket';
     rocket.textContent = '🚀';
+    rocket.setAttribute('aria-hidden', 'true');
 
     rail.appendChild(line);
     rail.appendChild(rocket);
 
-    var stops = cards.map(function (card, i) {
-      var s = document.createElement('span');
-      s.className = 'hm-flow-stop';
-      s.style.left = (n === 1 ? 50 : (i / (n - 1)) * 100) + '%';
-      s.textContent = String(i + 1);
-      rail.appendChild(s);
-      return s;
+    var stops = STAGES.map(function (st, i) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'hm-flow-stop is-' + st.c;
+      b.style.left = ((i / (n - 1)) * 100) + '%';
+      var num = document.createElement('span');
+      num.className = 'hm-stop-num';
+      num.textContent = String(i + 1);
+      var lab = document.createElement('span');
+      lab.className = 'hm-stop-label';
+      b.appendChild(num);
+      b.appendChild(lab);
+      b.addEventListener('click', function () { stop(); paint(i); location.hash = '#' + st.go; });
+      rail.appendChild(b);
+      return b;
     });
 
     var tools = document.createElement('div');
@@ -279,12 +296,18 @@
 
     function label() {
       btn.textContent = flowTimer ? T('⏸ Jeda', '⏸ Pause') : T('▶ Mainkan aliran', '▶ Play the flow');
-      hint.textContent = T('Kenali → Bina → Terbit. Tiga langkah sahaja.', 'Explore → Build → Publish. Just three steps.');
+      hint.textContent = T('Lima bahagian bengkel. Tekan mana-mana langkah untuk terus ke situ.',
+                           'The five parts of the workshop. Tap any step to go straight there.');
+      STAGES.forEach(function (st, i) {
+        stops[i].querySelector('.hm-stop-label').textContent = T(st.bm, st.en);
+        stops[i].setAttribute('aria-label',
+          T('Bahagian ', 'Part ') + (i + 1) + ': ' + T(st.bm, st.en) + ' — ' + T(st.sub[0], st.sub[1]));
+      });
     }
 
     function paint(i) {
       flowStep = Math.max(0, Math.min(n - 1, i));
-      var pct = (n === 1 ? 50 : (flowStep / (n - 1)) * 100);
+      var pct = (flowStep / (n - 1)) * 100;
       fill.style.width = pct + '%';
       rocket.style.left = pct + '%';
       rocket.classList.toggle('lift', flowStep === n - 1);
@@ -292,7 +315,8 @@
         s.classList.toggle('done', j < flowStep);
         s.classList.toggle('on', j === flowStep);
       });
-      cards.forEach(function (c, j) { c.classList.toggle('hm-now', j === flowStep); });
+      var active = STAGES[flowStep].card;
+      cards.forEach(function (c, j) { c.classList.toggle('hm-now', j === active); });
     }
 
     function stop() { clearInterval(flowTimer); flowTimer = 0; label(); }
@@ -303,12 +327,11 @@
       flowTimer = setInterval(function () {
         if (flowStep >= n - 1) { stop(); return; }
         paint(flowStep + 1);
-      }, 1700);
+      }, 1500);
       label();
     }
 
     btn.addEventListener('click', function () { if (flowTimer) stop(); else play(); });
-    stops.forEach(function (s, i) { s.addEventListener('click', function () { stop(); paint(i); }); });
 
     tools.appendChild(btn);
     tools.appendChild(hint);
@@ -326,12 +349,9 @@
         if (!es[0].isIntersecting || flowPlayed) return;
         flowPlayed = true;
         io.disconnect();
-        grid.classList.add('hm-stagger');
         setTimeout(play, 500);
       }, { threshold: 0.35 });
       io.observe(grid);
-    } else {
-      grid.classList.add('hm-stagger');
     }
   }
 

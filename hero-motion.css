@@ -143,7 +143,7 @@
   to   { opacity: 1; transform: none; }
 }
 
-/* ---------- 3. Process flow: 01 Kenali → 02 Bina → 03 Terbit ---------- */
+/* ---------- 3. Process flow: Mula → Kenali → Bina → Terbit → Kongsi ---------- */
 
 .hm-flow {
   position: relative;
@@ -153,7 +153,7 @@
 /* The rocket flies in its own lane above the line, so it never covers a number. */
 .hm-flow-rail {
   position: relative;
-  height: 74px;
+  height: 96px;
 }
 .hm-flow-line {
   position: absolute;
@@ -173,10 +173,26 @@
   background: linear-gradient(90deg, var(--yellow, #ffd43b), var(--red, #ff6b5b));
   transition: width .9s cubic-bezier(.3, .8, .3, 1);
 }
+/* Each stop is a button: a numbered circle with its stage name underneath.
+   Tapping one goes to that part of the workshop. */
 .hm-flow-stop {
   position: absolute;
   top: 38px;
   transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 78px;
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+  color: #6b7280;
+  transition: color .3s;
+}
+.hm-stop-num {
   width: 32px;
   height: 32px;
   display: grid;
@@ -188,17 +204,24 @@
   color: #6b7280;
   transition: background .3s, border-color .3s, color .3s, transform .3s;
 }
-.hm-flow-stop.on {
-  background: var(--ink, #10183b);
-  border-color: var(--ink, #10183b);
-  color: #fff;
-  transform: translateX(-50%) scale(1.14);
+.hm-stop-label {
+  font: 800 13px/1.2 var(--display, system-ui);
+  white-space: nowrap;
+  transition: color .3s;
 }
-.hm-flow-stop.done {
-  background: var(--red, #ff6b5b);
-  border-color: var(--red, #ff6b5b);
-  color: #fff;
-}
+
+/* a finished stage takes its own colour from the agenda */
+.hm-flow-stop.done .hm-stop-num,
+.hm-flow-stop.on .hm-stop-num { color: #fff; }
+.hm-flow-stop.is-blue.done   .hm-stop-num, .hm-flow-stop.is-blue.on   .hm-stop-num { background: var(--blue, #163bcf);  border-color: var(--blue, #163bcf); }
+.hm-flow-stop.is-yellow.done .hm-stop-num, .hm-flow-stop.is-yellow.on .hm-stop-num { background: var(--yellow, #ffdf35); border-color: var(--ink, #10183b); color: var(--ink, #10183b); }
+.hm-flow-stop.is-red.done    .hm-stop-num, .hm-flow-stop.is-red.on    .hm-stop-num { background: var(--red, #e33445);    border-color: var(--red, #e33445); }
+.hm-flow-stop.is-green.done  .hm-stop-num, .hm-flow-stop.is-green.on  .hm-stop-num { background: var(--green, #1f9d55);  border-color: var(--green, #1f9d55); }
+.hm-flow-stop.is-ink.done    .hm-stop-num, .hm-flow-stop.is-ink.on    .hm-stop-num { background: var(--ink, #10183b);    border-color: var(--ink, #10183b); }
+
+.hm-flow-stop.on { color: var(--ink, #10183b); }
+.hm-flow-stop.on .hm-stop-num { transform: scale(1.16); box-shadow: 0 0 0 4px #10183b1a; }
+.hm-flow-stop:hover .hm-stop-num { border-color: var(--ink, #10183b); }
 .hm-rocket {
   position: absolute;
   top: 0;
@@ -228,19 +251,11 @@
 }
 .hm-flow-tools .hint { margin: 0; }
 
-/* the three cards arrive one after another */
-.home-grid.hm-stagger > article {
-  animation: hmUp .7s cubic-bezier(.2, .8, .2, 1) both;
-}
-.home-grid.hm-stagger > article:nth-child(1) { animation-delay: .05s; }
-.home-grid.hm-stagger > article:nth-child(2) { animation-delay: .18s; }
-.home-grid.hm-stagger > article:nth-child(3) { animation-delay: .31s; }
+/* The card the rocket is passing gets a ring. This deliberately avoids transform
+   and opacity, which the site's own scroll reveal already animates on these cards. */
+.home-grid > article.hm-now { box-shadow: 6px 6px 0 var(--ink, #10183b), 0 0 0 4px #ffdf35cc; }
 
-/* the card the rocket is passing lifts slightly */
-.home-grid > article { transition: transform .35s cubic-bezier(.3, 1.4, .5, 1), box-shadow .35s; }
-.home-grid > article.hm-now { transform: translateY(-7px); }
-
-/* ---------- 4. Anyone who asked for less motion gets none of it ---------- */
+/* ---------- 7. Anyone who asked for less motion gets none of it ---------- */
 
 @media (prefers-reduced-motion: reduce) {
   .hm-chip,
@@ -248,7 +263,6 @@
   .hm-art.hm-go > img,
   .hm-cap.hm-go > *,
   .hm-go .hm-word,
-  .home-grid.hm-stagger > article,
   .hm-rocket,
   .hm-chip .dot {
     animation: none !important;
@@ -259,19 +273,101 @@
   .hm-flow-fill, .hm-rocket, .hm-flow-stop, .home-grid > article { transition: none; }
 }
 
-/* ---------- 5. Phones ---------- */
+/* ---------- 5. The five stage cards on the landing page ----------
+   One card per stage, in the same order and the same colours as the Agenda and
+   the rail above them: Mula (blue), Kenali (yellow), Bina (red), Terbit (green),
+   Kongsi (navy). Five across on a wide screen, folding to three, two, then one. */
+
+.home-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; }
+
+/* the type has to breathe in a narrower column */
+.home-grid h3 { font-size: 1.12rem; line-height: 1.2; }
+.home-grid p { font-size: .92rem; line-height: 1.5; }
+.home-grid a { font-size: .68rem; letter-spacing: .06em; line-height: 1.4; }
+.home-grid article .in { padding: 16px 15px 15px; }
+.home-grid .hg-ic { width: 60px; height: 60px; }
+.home-grid .tabh { font-size: .74rem; padding: 0 26px 0 10px; }
+
+/* stage colours */
+.home-grid article:nth-child(1) .tabh { background: var(--blue,   #163bcf); color: #fff; }
+.home-grid article:nth-child(2) .tabh { background: var(--yellow, #ffdf35); color: var(--ink, #10183b); }
+.home-grid article:nth-child(3) .tabh { background: var(--red,    #e33445); color: #fff; }
+.home-grid article:nth-child(4) .tabh { background: var(--green,  #1f9d55); color: #fff; }
+.home-grid article:nth-child(5) .tabh { background: var(--ink,    #10183b); color: #fff; }
+
+.home-grid article:nth-child(1) .in { border-top-color: var(--blue,   #163bcf); }
+.home-grid article:nth-child(2) .in { border-top-color: var(--yellow, #ffdf35); }
+.home-grid article:nth-child(3) .in { border-top-color: var(--red,    #e33445); }
+.home-grid article:nth-child(4) .in { border-top-color: var(--green,  #1f9d55); }
+.home-grid article:nth-child(5) .in { border-top-color: var(--ink,    #10183b); }
+
+/* the little number circle: dark on the yellow tab, yellow everywhere else */
+.home-grid article .tabh em           { background: var(--yellow, #ffdf35); color: var(--ink, #10183b); }
+.home-grid article:nth-child(2) .tabh em { background: var(--ink, #10183b); color: #fff; }
+
+@media (hover: hover) {
+  .home-grid article:nth-child(1):hover { transform: rotate(-2deg) translateY(-6px); }
+  .home-grid article:nth-child(2):hover { transform: translateY(-8px); }
+  .home-grid article:nth-child(3):hover { transform: rotate(2deg) translateY(-6px); }
+  .home-grid article:nth-child(4):hover { transform: translateY(-8px); }
+  .home-grid article:nth-child(5):hover { transform: rotate(-2deg) translateY(-6px); }
+}
+
+@media (max-width: 1139px) {
+  .home-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+  .home-grid h3 { font-size: 1.28rem; }
+  .home-grid p { font-size: 1rem; }
+  .home-grid a { font-size: .74rem; }
+  .home-grid .hg-ic { width: 72px; height: 72px; }
+}
+@media (max-width: 899px) {
+  .home-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 619px) {
+  .home-grid { grid-template-columns: 1fr !important; }
+}
+
+/* ---------- 6. "Apa yang anda akan bina": balance and size ----------
+   The pills were stacked tighter than they are tall, so "GitHub Pages" and
+   "Netlify" sat underneath their neighbours and could not be read. Giving each
+   pill its own room keeps the tilted-stack look and makes all six legible.
+   The sample cards are also enlarged, since they are the point of the section. */
+
+.mo-pills { gap: 14px; min-height: 0; }
+.mo-pills span { margin-top: 0; }
+
+/* bigger website samples */
+.mo-ring { height: clamp(250px, 29vw, 348px); }
+.mo-card { width: clamp(280px, 33vw, 420px); }
+
+@media (max-width: 860px) {
+  .mo-pills { min-height: 0; }
+}
+@media (max-width: 620px) {
+  .mo-card { width: 272px; }
+  .mo-ring { height: 252px; }
+}
+@media (max-width: 520px) {
+  .mo-ring { height: 248px; }
+  .mo-pills span { padding: 9px 18px; }
+}
+
+/* ---------- 8. Phones ---------- */
 
 @media (max-width: 760px) {
   .hm-chip { font-size: .62rem; padding: 4px 9px; gap: 5px; box-shadow: 2px 2px 0 var(--ink, #10183b); }
   .hm-chip.c3, .hm-chip.c4 { display: none !important; }
   .hm-art .hm-tw { width: 3.4%; }
   .hm-rocket { width: 28px; height: 28px; margin-left: -14px; font-size: 21px; line-height: 28px; }
-  .hm-flow-rail { height: 66px; }
+  .hm-flow { padding: 0 18px; }
+  .hm-flow-rail { height: 84px; }
   .hm-flow-line { top: 45px; }
-  .hm-flow-stop { top: 34px; width: 28px; height: 28px; font-size: 12px; }
+  .hm-flow-stop { top: 32px; width: 62px; gap: 5px; }
+  .hm-stop-num { width: 28px; height: 28px; border-width: 2px; font-size: 12px; }
+  .hm-stop-label { font-size: 11px; }
 }
 
-/* ---------- 6. Retire the older one-off decorations ----------
+/* ---------- 4. Retire the older one-off decorations ----------
    The chips below were page-specific and are replaced by .hm-chip,
    so hiding them keeps each hero to a single set. */
 .hx-chip, .wi-fx, .hx-art .hx-tw, .ag-art .hx-tw, .wi-art .hx-tw { display: none !important; }
