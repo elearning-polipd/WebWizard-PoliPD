@@ -371,3 +371,25 @@
    The chips below were page-specific and are replaced by .hm-chip,
    so hiding them keeps each hero to a single set. */
 .hx-chip, .wi-fx, .hx-art .hx-tw, .ag-art .hx-tw, .wi-art .hx-tw { display: none !important; }
+
+/* ---------- Fasilitator: "Saya dan anda" ---------- */
+.ab-meet{margin:6px auto 30px}
+.ab-meet h2{margin:0 0 6px;font:800 clamp(1.5rem,3vw,2.1rem)/1.15 var(--display,system-ui);letter-spacing:-.02em}
+.abm-sub{margin:0 0 20px;font-size:1.05rem;max-width:60ch}
+.abm-cards{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:12px;align-items:stretch}
+.abm-c{padding:18px 20px;border:2px solid var(--ink,#10183b);border-radius:14px;box-shadow:5px 5px 0 var(--ink,#10183b);background:#fff}
+.abm-c span{display:block;font-size:2rem;line-height:1;margin-bottom:8px}
+.abm-c b{display:block;font:800 1.15rem/1.2 var(--display,system-ui);margin-bottom:6px}
+.abm-c p{margin:0;font-size:.98rem;line-height:1.5}
+.abm-c.c1{background:#e8efff}
+.abm-c.c2{background:var(--yellow,#ffd43b)}
+.abm-c.c3{background:var(--ink,#10183b);color:#fff}
+.abm-plus{align-self:center;font:800 1.9rem/1 var(--display,system-ui);font-style:normal}
+.abm-how{margin:22px 0 10px;font:700 .78rem/1 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:#6b7280}
+.abm-chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.abm-chips li{display:inline-flex;gap:8px;align-items:center;padding:9px 15px;border:2px solid var(--ink,#10183b);border-radius:999px;background:#fff;font-weight:700;font-size:.95rem;box-shadow:3px 3px 0 var(--ink,#10183b)}
+.abm-num{margin:0 0 12px;font:700 .78rem/1 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:#6b7280}
+@media(max-width:860px){
+  .abm-cards{grid-template-columns:1fr}
+  .abm-plus{display:none}
+}
