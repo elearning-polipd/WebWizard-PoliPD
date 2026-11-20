@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Web Wizard · Pautan Rujukan</title>
+<meta name="description" content="Semua pautan selepas bengkel Web Wizard: rakaman, nota, panduan, studio dan maklum balas. Unit e-Learning POLIPD.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Web Wizard · Pautan Rujukan">
+<meta property="og:description" content="Rakaman, nota, panduan dan alat bengkel Web Wizard dalam satu halaman.">
+<meta property="og:image" content="https://elearning-polipd.github.io/WebWizard-PoliPD/assets/og-web-wizard-live.jpg?v=2">
+<meta property="og:url" content="https://elearning-polipd.github.io/WebWizard-PoliPD/pautan.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="./assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap">
+<style>
+:root{--ink:#10183b;--paper:#fffdf7;--cream:#fdf6eb;--blue:#163bcf;--yellow:#ffdf35;--red:#e33445;--green:#1f9d55;--muted:#55607a;--line:#e3d9cf;
+ --display:"Space Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;--body:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);background-image:linear-gradient(#10183b0b 1px,transparent 1px),linear-gradient(90deg,#10183b0b 1px,transparent 1px);background-size:28px 28px;color:var(--ink);font:16px/1.5 var(--body)}
+.wrap{width:min(640px,100% - 32px);margin:0 auto;padding:28px 0 48px}
+.hero{position:relative;margin:0 auto 18px;border:3px solid var(--ink);border-radius:20px;overflow:hidden;box-shadow:6px 6px 0 var(--ink);background:#fdf6eb;aspect-ratio:16/9}
+.hero-img{display:block;width:100%;height:100%;object-fit:cover;object-position:62% 30%}
+.badge{position:absolute;left:14px;bottom:14px;width:72px;height:72px;border-radius:50%;background:var(--yellow);border:3px solid var(--ink);display:grid;place-items:center;box-shadow:3px 3px 0 var(--ink)}
+.badge img{width:60px;height:60px}
+.gh{display:flex;align-items:center;gap:12px;margin:28px 0 12px}
+.gh img{width:84px;height:48px;object-fit:cover;border-radius:10px;border:2px solid var(--ink);background:#fdf6eb;flex:none}
+.gh h2{margin:0}
+.fac{width:64px;height:64px;border-radius:50%;border:3px solid var(--ink);object-fit:cover;margin-bottom:6px}
+.lang{display:flex;justify-content:flex-end;gap:6px;margin-bottom:10px}
+.lang button{padding:6px 12px;border:2px solid var(--ink);border-radius:10px;background:#fff;font:700 .85rem var(--display);cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.head{text-align:center;margin-bottom:22px}
+.av{width:104px;height:104px;margin:0 auto 12px;border-radius:50%;background:var(--yellow);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);display:grid;place-items:center;overflow:hidden}
+.av img{width:92px;height:92px}
+h1{margin:0;font:700 clamp(1.7rem,6vw,2.3rem)/1.1 var(--display);letter-spacing:-.02em}
+.sub{margin:6px 0 0;color:var(--muted);font-weight:600}
+.meta{display:inline-flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:12px}
+.meta span{padding:4px 10px;border:2px solid var(--ink);border-radius:999px;background:#fff;font:700 .78rem var(--display)}
+.how{text-align:left;margin:18px 0 6px;padding:14px 16px;border:2px solid var(--ink);border-radius:14px;background:#fff6c7;box-shadow:4px 4px 0 var(--ink);font-size:.95rem}
+.how b{display:block;font:700 1rem var(--display);margin-bottom:4px}
+.how ol{margin:0;padding-left:20px}
+h2{margin:26px 0 10px;font:700 .8rem/1 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.links{display:grid;gap:12px}
+a.card{display:grid;grid-template-columns:52px 1fr auto;gap:12px;align-items:center;padding:12px 14px;border:2px solid var(--ink);border-radius:14px;background:#fff;color:inherit;text-decoration:none;box-shadow:4px 4px 0 var(--ink);transition:transform .15s,box-shadow .15s}
+a.card:hover{transform:translateY(-2px);box-shadow:6px 6px 0 var(--ink)}
+a.card:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+a.card.main{background:var(--blue);color:#fff}
+a.card.main .d{color:#ffffffd9}
+a.card.soon{opacity:.6;box-shadow:none;border-style:dashed;pointer-events:none}
+.ic{width:52px;height:52px;border-radius:12px;background:var(--cream);display:grid;place-items:center;font-size:1.6rem;overflow:hidden}
+a.card.main .ic{background:#ffffff26}
+.ic img{width:44px;height:44px;object-fit:contain}
+.t{display:block;font:700 1.05rem/1.25 var(--display)}
+.d{display:block;margin-top:2px;font-size:.88rem;line-height:1.4;color:var(--muted)}
+.go{font:700 1.2rem var(--display)}
+.tag{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:999px;background:var(--yellow);color:var(--ink);font:700 .68rem/1.6 var(--display);vertical-align:2px}
+.tag.lock{background:var(--ink);color:#fff}
+.url{display:inline-block;margin-top:6px;padding:3px 9px;border-radius:999px;background:#ffffff26;font:700 .78rem/1.4 ui-monospace,Menlo,Consolas,monospace;word-break:break-all}
+.foot{margin-top:30px;text-align:center;color:var(--muted);font-size:.85rem}
+.foot a{color:inherit}
+@media(prefers-reduced-motion:reduce){a.card{transition:none}}
+@media(max-width:420px){a.card{grid-template-columns:44px 1fr;}.go{display:none}.ic{width:44px;height:44px}.ic img{width:38px;height:38px}}
+</style>
+</head>
+<body>
+<main class="wrap">
+ <div class="lang" role="group" aria-label="Bahasa / Language"><button type="button" data-lang="ms" aria-pressed="true">BM</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div>
+ <header class="head">
+  <div class="hero"><img class="hero-img" src="./assets/hero-home.webp" alt="" width="1672" height="941"><span class="badge"><img src="./assets/icon-app.png" alt=""></span></div>
+  <h1>Web Wizard</h1>
+  <p class="sub" data-i18n="sub">Pautan rujukan selepas bengkel · From Idea to Live</p>
+  <div class="meta"><span>Digital Discovery Series 2026</span><span data-i18n="unit">Unit e-Learning POLIPD</span></div>
+  <div class="how"><b data-i18n="howT">Cara guna halaman ini</b>
+   <ol><li data-i18n="how1">Pilih apa yang anda perlukan: tonton semula, baca nota atau terus bina.</li>
+   <li data-i18n="how2">Setiap pautan dibuka dalam tab baharu. Halaman ini kekal di sini.</li>
+   <li data-i18n="how3">Simpan halaman ini (bookmark) untuk rujukan akan datang.</li></ol></div>
+ </header>
+ <div id="list"></div>
+ <p class="foot"><img class="fac" src="./assets/madam-julie.webp" alt="Madam Julie" width="64" height="64"><br><span data-i18n="foot">Fasilitator: Julie Marlina binti Hasan · Unit e-Learning POLIPD</span><br><a href="https://elearning-polipd.github.io/WebWizard-PoliPD/">elearning-polipd.github.io/WebWizard-PoliPD</a></p>
+</main>
+<script>
+/* ===== EDIT YOUR LINKS HERE =====
+   url: the full link. Leave it as '' and the card shows "Akan datang" (coming soon) until you add it.
+   Each entry: [icon, BM title, EN title, BM how it helps, EN how it helps, url, main?] */
+var BASE='https://elearning-polipd.github.io/WebWizard-PoliPD/';
+var GROUPS=[
+ ['Mula di sini','Start here','hero-home',[
+  ['img:icon-app','Laman Web Wizard','Web Wizard website','Semua kandungan bengkel: langkah demi langkah dari idea hingga laman anda terbit.','All workshop content: step by step from an idea to your published site.',BASE,true]
+ ]],
+ ['Tonton & baca semula','Watch & read again','hero-atur-cara',[
+  ['🎬','Rakaman video sesi','Session recording','Untuk peserta berbayar sahaja. Log masuk Google dengan emel yang anda daftarkan, kemudian tonton semula sesi penuh 11 Nov 2026.','For paid participants only. Sign in to Google with the email you registered with, then rewatch the full 11 Nov 2026 session.','https://drive.google.com/file/d/1mBCSEs0fvMLac2U3x8RRtj99RpHVpcVp/view',false,true],
+  ['📝','Nota sesi','Session notes','Untuk peserta berbayar sahaja. Ringkasan apa yang dibuat dalam sesi, langkah demi langkah. Log masuk dengan emel yang anda daftarkan.','For paid participants only. A step-by-step summary of the session. Sign in with the email you registered with.','https://docs.google.com/document/d/1yguez--NsOmENCu_69DqQUBnkVP1qETSRh9Fq2ndTAk/view',false,true],
+  ['img:nav-persediaan','Persediaan sebelum bengkel','Before the workshop','Senarai semak akaun, alat dan bacaan ringkas sebelum anda mula membina.','A checklist of accounts, tools and a short read before you start building.',BASE+'#persediaan']
+ ]],
+ ['Bina & terbit','Build & publish','hero-praktikal',[
+  ['img:nav-praktikal','Satu prompt, satu laman','One prompt, one website','Salin satu prompt, masukkan bahan anda ke AI dan muat turun laman-saya.zip.','Copy one prompt, give your materials to the AI and download laman-saya.zip.',BASE+'#praktikal'],
+  ['img:nav-terbit','Panduan GitHub Pages','GitHub Pages guide','9 langkah untuk menerbitkan laman anda secara percuma dengan pautan awam.','9 steps to publish your site for free with a public link.',BASE+'#github'],
+  ['img:nav-kenali','Contoh laman: 4 jenis × 3 gaya','Sample sites: 4 types × 3 styles','Lihat contoh sebelum memilih jenis dan gaya laman anda.','See examples before choosing your site type and style.',BASE+'#kenali'],
+  ['🛟','Soal jawab & bantuan','Q&A and help','Jawapan untuk masalah biasa: 404, gambar tak keluar, perubahan tak muncul.','Answers to common problems: 404, missing images, changes not showing.',BASE+'#soal-jawab']
+ ]],
+ ['Kongsi & maklum balas','Share & feedback','hero-kongsi',[
+  ['img:nav-kongsi','Galeri laman peserta','Participant showcase','Kongsi pautan laman anda dan lihat hasil rakan-rakan.','Share your site link and see what others built.',BASE+'#kongsi'],
+  ['✅','Kehadiran','Attendance','Sahkan kehadiran anda untuk rekod dan e-sijil.','Confirm your attendance for the record and the e-certificate.',''],
+  ['⭐','Soal selidik akhir','Post-workshop survey','Pendapat anda membantu kami menambah baik siri seterusnya.','Your feedback helps us improve the next series.',BASE+'#pasca'],
+  ['💬','Kumpulan Telegram','Telegram group','Tanya soalan dan dapatkan bantuan selepas bengkel.','Ask questions and get help after the workshop.','']
+ ]]
+];
+var T={ms:{sub:'Pautan rujukan selepas bengkel · From Idea to Live',unit:'Unit e-Learning POLIPD',howT:'Cara guna halaman ini',how1:'Pilih apa yang anda perlukan: tonton semula, baca nota atau terus bina.',how2:'Setiap pautan dibuka dalam tab baharu. Halaman ini kekal di sini.',how3:'Simpan halaman ini (bookmark) untuk rujukan akan datang.',foot:'Fasilitator: Julie Marlina binti Hasan · Unit e-Learning POLIPD',soon:'Akan datang',start:'Mula',paid:'Peserta berbayar'},
+ en:{sub:'After-workshop reference links · From Idea to Live',unit:'Unit e-Learning POLIPD',howT:'How to use this page',how1:'Pick what you need: rewatch, read the notes or start building.',how2:'Each link opens in a new tab. This page stays here.',how3:'Bookmark this page for later.',foot:'Facilitator: Julie Marlina binti Hasan · Unit e-Learning POLIPD',soon:'Coming soon',start:'Start',paid:'Paid participants'}};
+var LANG='ms';try{if(localStorage.getItem('ww-links-lang')==='en')LANG='en';}catch(e){}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function render(){var en=LANG==='en',i=en?1:0;document.documentElement.lang=en?'en':'ms';
+ document.querySelectorAll('[data-i18n]').forEach(function(el){el.textContent=T[LANG][el.dataset.i18n];});
+ document.querySelectorAll('[data-lang]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.lang===LANG));});
+ var href=function(u){return u?u.split(BASE+'#').join(BASE+(en?'?lang=en':'')+'#'):'';};
+ document.getElementById('list').innerHTML=GROUPS.map(function(g){return '<div class="gh"><img src="./assets/'+g[2]+'.webp" alt="" loading="lazy"><h2>'+esc(g[i])+'</h2></div><div class="links">'+g[3].map(function(c){
+  var ic=c[0].indexOf('img:')===0?'<img src="./assets/'+c[0].slice(4)+'.png" alt="">':esc(c[0]),u=href(c[5]),soon=!u;
+  return '<a class="card'+(c[6]?' main':'')+(soon?' soon':'')+'" '+(soon?'aria-disabled="true"':'href="'+esc(u)+'" target="_blank" rel="noopener"')+'><span class="ic" aria-hidden="true">'+ic+'</span><span><span class="t">'+esc(c[1+i])+(soon?'<span class="tag">'+T[LANG].soon+'</span>':'')+(c[7]?'<span class="tag lock">🔒 '+T[LANG].paid+'</span>':'')+'</span><span class="d">'+esc(c[3+i])+'</span>'+(c[6]?'<span class="url">elearning-polipd.github.io/WebWizard-PoliPD</span>':'')+'</span><span class="go" aria-hidden="true">↗</span></a>';}).join('')+'</div>';}).join('');
+ document.title=en?'Web Wizard · Reference links':'Web Wizard · Pautan Rujukan';}
+document.addEventListener('click',function(e){var b=e.target.closest('[data-lang]');if(!b)return;LANG=b.dataset.lang;try{localStorage.setItem('ww-links-lang',LANG);}catch(x){}render();});
+render();
+</script>
+</body>
+</html>
