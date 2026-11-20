@@ -21,7 +21,26 @@
 body{margin:0;background:var(--cream);background-image:linear-gradient(#10183b0b 1px,transparent 1px),linear-gradient(90deg,#10183b0b 1px,transparent 1px);background-size:28px 28px;color:var(--ink);font:16px/1.5 var(--body)}
 .wrap{width:min(640px,100% - 32px);margin:0 auto;padding:28px 0 48px}
 .hero{position:relative;margin:0 auto 18px;border:3px solid var(--ink);border-radius:20px;overflow:hidden;box-shadow:6px 6px 0 var(--ink);background:#fdf6eb;aspect-ratio:16/9}
-.hero-img{display:block;width:100%;height:100%;object-fit:cover;object-position:62% 30%}
+.hero-img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;object-position:78% 30%}
+.hero-txt{position:relative;z-index:1;height:100%;width:52%;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:6px;padding:18px 0 18px 20px;text-align:left;background:linear-gradient(90deg,#fdf6eb 0,#fdf6eb 78%,#fdf6eb00 100%)}
+.hero-txt h1{font-size:clamp(2rem,6.4vw,3rem);line-height:.95;margin:6px 0 0}
+.hero-txt .sub{margin:4px 0 0;font-size:.95rem;color:var(--ink)}
+.tagl{margin:0;display:inline-block;padding:2px 8px;background:var(--yellow);font:700 .95rem var(--display);border-radius:4px}
+.hero-txt .meta{justify-content:flex-start;margin-top:8px}
+.hero-txt .badge{position:static;width:56px;height:56px}.hero-txt .badge img{width:46px;height:46px}
+.gate{margin:4px 0 18px;padding:18px;border:2px solid var(--ink);border-radius:16px;background:#fff;box-shadow:5px 5px 0 var(--ink)}
+.gate .gt{display:block;font:700 1.15rem var(--display);margin-bottom:4px}
+.gate p{margin:0 0 10px}
+#gateForm{display:flex;gap:8px;flex-wrap:wrap}
+#gEmail{flex:1 1 220px;min-width:0;padding:12px 14px;border:2px solid var(--ink);border-radius:12px;font:600 1rem var(--body)}
+#gEmail:focus{outline:3px solid var(--blue);outline-offset:2px}
+.gbtn{padding:12px 20px;border:2px solid var(--ink);border-radius:12px;background:var(--yellow);font:700 1rem var(--display);box-shadow:3px 3px 0 var(--ink);cursor:pointer}
+.gerr{color:var(--red);font-weight:700;margin:10px 0 0!important}
+.gnote{font-size:.85rem;color:var(--muted);margin:10px 0 0!important}
+.who{margin:0 0 6px;font-size:.88rem;color:var(--muted);text-align:center}
+.linkb{background:none;border:0;padding:0;color:var(--blue);font:inherit;font-weight:700;text-decoration:underline;cursor:pointer}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media(max-width:560px){.hero{aspect-ratio:auto}.hero-img{position:static;height:auto;aspect-ratio:16/9;object-position:70% 30%}.hero-txt{width:auto;padding:14px 16px 16px;background:#fdf6eb;border-top:3px solid var(--ink)}.hero-txt .badge{position:absolute;top:-36px;left:14px}}
 .badge{position:absolute;left:14px;bottom:14px;width:72px;height:72px;border-radius:50%;background:var(--yellow);border:3px solid var(--ink);display:grid;place-items:center;box-shadow:3px 3px 0 var(--ink)}
 .badge img{width:60px;height:60px}
 .gh{display:flex;align-items:center;gap:12px;margin:28px 0 12px}
@@ -68,16 +87,35 @@ a.card.main .ic{background:#ffffff26}
 <main class="wrap">
  <div class="lang" role="group" aria-label="Bahasa / Language"><button type="button" data-lang="ms" aria-pressed="true">BM</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div>
  <header class="head">
-  <div class="hero"><img class="hero-img" src="./assets/hero-home.webp" alt="" width="1672" height="941"><span class="badge"><img src="./assets/icon-app.png" alt=""></span></div>
-  <h1>Web Wizard</h1>
-  <p class="sub" data-i18n="sub">Pautan rujukan selepas bengkel · From Idea to Live</p>
-  <div class="meta"><span>Digital Discovery Series 2026</span><span data-i18n="unit">Unit e-Learning POLIPD</span></div>
+  <div class="hero">
+   <img class="hero-img" src="./assets/hero-home.webp" alt="" width="1672" height="941">
+   <div class="hero-txt">
+    <span class="badge"><img src="./assets/icon-app.png" alt=""></span>
+    <h1>Web<br>Wizard</h1>
+    <p class="sub" data-i18n="sub">Pautan rujukan selepas bengkel</p>
+    <p class="tagl">From Idea to Live</p>
+    <div class="meta"><span>Digital Discovery Series 2026</span><span data-i18n="unit">Unit e-Learning POLIPD</span></div>
+   </div>
+  </div>
+ </header>
+ <section class="gate" id="gate" hidden>
+  <b class="gt" data-i18n="gateT">Untuk peserta berdaftar sahaja</b>
+  <p data-i18n="gateP">Masukkan emel yang anda gunakan semasa mendaftar bengkel Web Wizard.</p>
+  <form id="gateForm" autocomplete="on"><label for="gEmail" class="sr" data-i18n="gateL">Emel pendaftaran</label>
+   <input id="gEmail" type="email" inputmode="email" autocomplete="email" required placeholder="nama@polipd.edu.my">
+   <button class="gbtn" type="submit" data-i18n="gateB">Masuk</button></form>
+  <p class="gerr" id="gErr" role="alert" hidden data-i18n="gateE">Emel ini tiada dalam senarai peserta. Semak ejaan, atau guna emel yang anda isi dalam borang pendaftaran.</p>
+  <p class="gnote" data-i18n="gateN">Tiada dalam senarai tetapi sudah mendaftar? Hubungi Unit e-Learning POLIPD.</p>
+ </section>
+ <div id="member" hidden>
+  <p class="who"><span data-i18n="hi">Akses peserta:</span> <b id="whoEmail"></b> · <button type="button" class="linkb" id="logout" data-i18n="out">Log keluar</button></p>
   <div class="how"><b data-i18n="howT">Cara guna halaman ini</b>
    <ol><li data-i18n="how1">Pilih apa yang anda perlukan: tonton semula, baca nota atau terus bina.</li>
    <li data-i18n="how2">Setiap pautan dibuka dalam tab baharu. Halaman ini kekal di sini.</li>
    <li data-i18n="how3">Simpan halaman ini (bookmark) untuk rujukan akan datang.</li></ol></div>
- </header>
+
  <div id="list"></div>
+ </div>
  <p class="foot"><img class="fac" src="./assets/madam-julie.webp" alt="Madam Julie" width="64" height="64"><br><span data-i18n="foot">Fasilitator: Julie Marlina binti Hasan · Unit e-Learning POLIPD</span><br><a href="https://elearning-polipd.github.io/WebWizard-PoliPD/">elearning-polipd.github.io/WebWizard-PoliPD</a></p>
 </main>
 <script>
@@ -107,8 +145,8 @@ var GROUPS=[
   ['💬','Kumpulan Telegram','Telegram group','Tanya soalan dan dapatkan bantuan selepas bengkel.','Ask questions and get help after the workshop.','']
  ]]
 ];
-var T={ms:{sub:'Pautan rujukan selepas bengkel · From Idea to Live',unit:'Unit e-Learning POLIPD',howT:'Cara guna halaman ini',how1:'Pilih apa yang anda perlukan: tonton semula, baca nota atau terus bina.',how2:'Setiap pautan dibuka dalam tab baharu. Halaman ini kekal di sini.',how3:'Simpan halaman ini (bookmark) untuk rujukan akan datang.',foot:'Fasilitator: Julie Marlina binti Hasan · Unit e-Learning POLIPD',soon:'Akan datang',start:'Mula',paid:'Peserta berbayar'},
- en:{sub:'After-workshop reference links · From Idea to Live',unit:'Unit e-Learning POLIPD',howT:'How to use this page',how1:'Pick what you need: rewatch, read the notes or start building.',how2:'Each link opens in a new tab. This page stays here.',how3:'Bookmark this page for later.',foot:'Facilitator: Julie Marlina binti Hasan · Unit e-Learning POLIPD',soon:'Coming soon',start:'Start',paid:'Paid participants'}};
+var T={ms:{sub:'Pautan rujukan selepas bengkel',unit:'Unit e-Learning POLIPD',howT:'Cara guna halaman ini',how1:'Pilih apa yang anda perlukan: tonton semula, baca nota atau terus bina.',how2:'Setiap pautan dibuka dalam tab baharu. Halaman ini kekal di sini.',how3:'Simpan halaman ini (bookmark) untuk rujukan akan datang.',foot:'Fasilitator: Julie Marlina binti Hasan · Unit e-Learning POLIPD',gateT:'Untuk peserta berdaftar sahaja',gateP:'Masukkan emel yang anda gunakan semasa mendaftar bengkel Web Wizard.',gateL:'Emel pendaftaran',gateB:'Masuk',gateE:'Emel ini tiada dalam senarai peserta. Semak ejaan, atau guna emel yang anda isi dalam borang pendaftaran.',gateN:'Tiada dalam senarai tetapi sudah mendaftar? Hubungi Unit e-Learning POLIPD.',hi:'Akses peserta:',out:'Log keluar',soon:'Akan datang',start:'Mula',paid:'Peserta berbayar'},
+ en:{sub:'After-workshop reference links',unit:'Unit e-Learning POLIPD',howT:'How to use this page',how1:'Pick what you need: rewatch, read the notes or start building.',how2:'Each link opens in a new tab. This page stays here.',how3:'Bookmark this page for later.',foot:'Facilitator: Julie Marlina binti Hasan · Unit e-Learning POLIPD',gateT:'For registered participants only',gateP:'Enter the email you used to register for the Web Wizard workshop.',gateL:'Registration email',gateB:'Enter',gateE:'This email is not on the participant list. Check the spelling, or use the email you entered in the registration form.',gateN:'Registered but not on the list? Contact Unit e-Learning POLIPD.',hi:'Participant access:',out:'Sign out',soon:'Coming soon',start:'Start',paid:'Paid participants'}};
 var LANG='ms';try{if(localStorage.getItem('ww-links-lang')==='en')LANG='en';}catch(e){}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
 function render(){var en=LANG==='en',i=en?1:0;document.documentElement.lang=en?'en':'ms';
@@ -121,6 +159,16 @@ function render(){var en=LANG==='en',i=en?1:0;document.documentElement.lang=en?'
  document.title=en?'Web Wizard · Reference links':'Web Wizard · Pautan Rujukan';}
 document.addEventListener('click',function(e){var b=e.target.closest('[data-lang]');if(!b)return;LANG=b.dataset.lang;try{localStorage.setItem('ww-links-lang',LANG);}catch(x){}render();});
 render();
+
+/* Participant check: SHA-256 of 'ww2026:'+email (first 24 hex chars) for everyone in the registration responses.
+   To add someone, ask Claude for their hash or paste their email into the ALLOW list builder. */
+var ALLOW=["a8a42c313aac5345e829e3ff", "9b023b18035a788b8b37b40d", "e924c029ba24aba2685286c2", "b4eb8dea25e519f9902861a9", "f73541f5e18481cb5c40a13a", "d7f8939c0d1412313c5c9184", "42779730b0c198ff484458ea", "56f28a2061e303e50c15a1fd", "df3e636da6945979b111643d", "dad813b0f43878107332b9ed", "75c65ffc03b43d3f746f722b", "c17e582bbce2e0c9798ab508", "218162ba941bd34dea9e626f", "f99337715745e82d88057ad2", "b10830de46c240faa67cf086", "ba9707d475a02d9fc3e4c6e1"];
+function sha(t){return crypto.subtle.digest('SHA-256',new TextEncoder().encode(t)).then(function(b){return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,'0');}).join('').slice(0,24);});}
+function show(email){var ok=!!email;document.getElementById('gate').hidden=ok;document.getElementById('member').hidden=!ok;document.getElementById('whoEmail').textContent=email||'';}
+function check(email){email=String(email||'').trim().toLowerCase();if(!email)return Promise.resolve(false);return sha('ww2026:'+email).then(function(h){return ALLOW.indexOf(h)>=0?email:false;});}
+document.getElementById('gateForm').addEventListener('submit',function(e){e.preventDefault();var v=document.getElementById('gEmail').value;check(v).then(function(ok){var er=document.getElementById('gErr');if(ok){er.hidden=true;try{localStorage.setItem('ww-links-email',ok);}catch(x){}show(ok);}else{er.hidden=false;}});});
+document.getElementById('logout').addEventListener('click',function(){try{localStorage.removeItem('ww-links-email');}catch(x){}show('');document.getElementById('gEmail').value='';});
+(function(){var saved='';try{saved=localStorage.getItem('ww-links-email')||'';}catch(x){}check(saved).then(function(ok){show(ok||'');});})();
 </script>
 </body>
 </html>
