@@ -1,4 +1,5 @@
-Web Wizard PoliPD - kemas kini 20 Nov 2026
+Web Wizard PoliPD - kemas kini 20 Nov 2026 (Satu prompt, satu laman)
 Muat naik 4 fail ke elearning-polipd/WebWizard-PoliPD, folder UTAMA:
   index.html, script.js, studio.html, hero-motion.css
+Pastikan jszip.min.js masih ada dalam repo (sudah ada).
 Kemudian hard refresh (Ctrl+Shift+R).
